@@ -1,4 +1,4 @@
-/* Reset defaults */
+/* Reset some default styles */
 * {
   margin: 0;
   padding: 0;
@@ -46,8 +46,13 @@ h2 {
   color: #0077cc;
 }
 
+.table-container {
+  overflow-x: auto;  /* horizontal scroll for mobile */
+}
+
 table {
   width: 100%;
+  min-width: 600px;
   border-collapse: collapse;
   margin-top: 10px;
 }
@@ -61,15 +66,11 @@ th, td {
 th {
   background-color: #0077cc;
   color: white;
+  cursor: pointer;
 }
 
 tr:nth-child(even) {
   background-color: #f9f9f9;
-}
-
-th.sortable {
-  cursor: pointer;
-  text-decoration: underline;
 }
 
 footer {
@@ -79,39 +80,34 @@ footer {
   color: #777;
 }
 
-/* Planet name styling */
-.planet-name {
-  cursor: pointer;
-}
-
-.planet-name.selected {
-  background-color: #0077cc;
-  color: white;
-  padding: 2px 4px;
-  border-radius: 4px;
-}
-
 /* Tooltip styling */
 .tooltip {
+  position: absolute;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   display: none;
-  position: absolute; /* positioned relative to viewport */
-  background-color: #fff;
-  border: 1px solid #0077cc;
-  padding: 10px;
-  max-width: 300px;
-  max-height: 400px;
+  max-width: 90vw;
+  max-height: 70vh;
   overflow-y: auto;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  font-size: 0.9em;
   z-index: 1000;
 }
 
 .tooltip img {
   max-width: 100%;
   height: auto;
-  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
-.tooltip-text {
-  max-height: 200px;
-  overflow-y: auto;
+@media screen and (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  th, td {
+    padding: 6px 8px;
+    font-size: 0.85em;
+  }
 }

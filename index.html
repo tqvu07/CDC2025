@@ -5,117 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CDC Planet Habitability</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Reset defaults */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-      line-height: 1.6;
-      padding: 20px;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    header h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 1.2em;
-      color: #555;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    section {
-      background-color: #fff;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      margin-bottom: 10px;
-      color: #0077cc;
-    }
-
-    /* Table styling */
-    .table-container {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      min-width: 600px;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-
-    th, td {
-      padding: 8px 12px;
-      border: 1px solid #ddd;
-      text-align: center;
-    }
-
-    th {
-      background-color: #0077cc;
-      color: white;
-      cursor: pointer;
-    }
-
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #777;
-    }
-
-    /* Tooltip */
-    .tooltip {
-      position: absolute;
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #ccc;
-      padding: 8px;
-      border-radius: 6px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      display: none;
-      max-width: 90vw;
-      max-height: 70vh;
-      overflow-y: auto;
-      font-size: 0.9em;
-      z-index: 1000;
-    }
-
-    .tooltip img {
-      max-width: 100%;
-      height: auto;
-      margin-top: 5px;
-    }
-
-    @media screen and (max-width: 600px) {
-      body { padding: 10px; }
-      th, td { padding: 6px 8px; font-size: 0.85em; }
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -163,21 +52,23 @@
           nameCell.textContent = planet["Planet Name"];
           nameCell.style.cursor = "pointer";
 
-          // Hover tooltip
+          // Hover tooltip (only shows if not pinned)
           nameCell.addEventListener("mouseenter", () => {
-            tooltip.innerHTML = `
-              <strong>${planet["Planet Name"]}</strong><br>
-              Host: ${planet["Host name"]}<br>
-              Distance: ${planet["Distance [pc]"]} pc<br>
-              Radius: ${planet["Planet radius (earth radius)"]} R⊕<br>
-              Semi-major Axis: ${planet["Semi-major Axis (AU)"]} AU
-            `;
-            tooltip.style.display = "block";
-            positionTooltip(tooltip, nameCell);
+            if (!nameCell.classList.contains("clicked")) {
+              tooltip.innerHTML = `
+                <strong>${planet["Planet Name"]}</strong><br>
+                Host: ${planet["Host name"]}<br>
+                Distance: ${planet["Distance [pc]"]} pc<br>
+                Radius: ${planet["Planet radius (earth radius)"]} R⊕<br>
+                Semi-major Axis: ${planet["Semi-major Axis (AU)"]} AU
+              `;
+              tooltip.style.display = "block";
+              positionTooltip(tooltip, nameCell);
+            }
           });
 
           nameCell.addEventListener("mouseleave", () => {
-            if(!nameCell.classList.contains("clicked")) {
+            if (!nameCell.classList.contains("clicked")) {
               tooltip.style.display = "none";
             }
           });
@@ -185,11 +76,18 @@
           // Click to pin tooltip
           nameCell.addEventListener("click", () => {
             const currentlyClicked = document.querySelector("td.clicked");
-            if(currentlyClicked && currentlyClicked !== nameCell) {
+            if (currentlyClicked && currentlyClicked !== nameCell) {
               currentlyClicked.classList.remove("clicked");
             }
 
             nameCell.classList.toggle("clicked");
+            tooltip.innerHTML = `
+              <strong>${planet["Planet Name"]}</strong><br>
+              Host: ${planet["Host name"]}<br>
+              Distance: ${planet["Distance [pc]"]} pc<br>
+              Radius: ${planet["Planet radius (earth radius)"]} R⊕<br>
+              Semi-major Axis: ${planet["Semi-major Axis (AU)"]} AU
+            `;
             tooltip.style.display = nameCell.classList.contains("clicked") ? "block" : "none";
             positionTooltip(tooltip, nameCell);
           });
@@ -205,7 +103,7 @@
         });
       });
 
-    // Function to position tooltip
+    // Position tooltip relative to element
     function positionTooltip(tooltip, element) {
       const rect = element.getBoundingClientRect();
       const scrollY = window.scrollY || window.pageYOffset;
@@ -225,12 +123,12 @@
       tooltip.style.left = `${left}px`;
     }
 
-    // Click outside to close pinned tooltip
+    // Click outside to unpin tooltip
     document.addEventListener("click", e => {
       const clickedInside = e.target.closest("td");
-      if(!clickedInside) {
+      if (!clickedInside) {
         const clickedCell = document.querySelector("td.clicked");
-        if(clickedCell) {
+        if (clickedCell) {
           clickedCell.classList.remove("clicked");
           tooltip.style.display = "none";
         }
