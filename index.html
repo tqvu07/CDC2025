@@ -1,118 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CDC Planet Habitability</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CDC Planet Habitability</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Welcome to CDC Planet Habitability</h1>
-    <p>Explore exoplanets and their potential for life!</p>
-  </header>
+<header>
+  <h1>Welcome to CDC Planet Habitability</h1>
+  <p>Explore exoplanets and their potential for life!</p>
+</header>
 
-  <main>
-    <section class="info">
-      <h2>Habitable Zone Planets</h2>
-      <table id="planet-table">
-        <thead>
-          <tr>
-            <th>Planet Name</th>
-            <th>Host Name</th>
-            <th>Distance (pc)</th>
-            <th>Radius (Earth)</th>
-            <th>Insolation Flux</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-  </main>
+<main>
+  <section class="info">
+    <h2>Habitable Zone Planets</h2>
+    <table id="planet-table">
+      <thead>
+        <tr>
+          <th>Planet Name</th>
+          <th>Host Name</th>
+          <th>Distance (pc)</th>
+          <th>Radius (Earth)</th>
+          <th>Insolation Flux</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+</main>
 
-  <footer>
-    <p>© 2025 CDC Planet Habitability</p>
-  </footer>
+<footer>
+  <p>© 2025 CDC Planet Habitability</p>
+</footer>
 
-  <script>
-    const tooltip = document.createElement("div");
-    tooltip.className = "tooltip";
-    document.body.appendChild(tooltip);
+<script>
+const tooltip = document.createElement("div");
+tooltip.className = "tooltip";
+document.body.appendChild(tooltip);
 
-    fetch("hz_planets.json")
-      .then(response => response.json())
-      .then(data => {
-        const tbody = document.querySelector("#planet-table tbody");
+fetch("hz_planets.json")
+.then(response => response.json())
+.then(data => {
+  const tbody = document.querySelector("#planet-table tbody");
 
-        data.forEach(planet => {
-          const row = document.createElement("tr");
+  data.forEach(planet => {
+    const row = document.createElement("tr");
 
-          const nameCell = document.createElement("td");
-          nameCell.textContent = planet["Planet Name"];
-          nameCell.style.cursor = "pointer";
+    const nameCell = document.createElement("td");
+    nameCell.textContent = planet["Planet Name"];
+    nameCell.style.cursor = "pointer";
 
-          // Hover tooltip
-          nameCell.addEventListener("mouseenter", () => {
-            if (!nameCell.classList.contains("clicked")) {
-              tooltip.innerHTML = `
-                <strong>${planet["Planet Name"]}</strong><br>
-                Host: ${planet["Host name"]}<br>
-                Distance: ${planet["Distance [pc]"]} pc<br>
-                Radius: ${planet["Planet radius (earth radius)"]} R⊕
-              `;
-              tooltip.classList.add("show");
-              nameCell.appendChild(tooltip);
-            }
-          });
+    // Position tooltip correctly below the cell
+    function positionTooltip() {
+      const rect = nameCell.getBoundingClientRect();
+      tooltip.style.top = (window.scrollY + rect.bottom + 5) + "px";
+      tooltip.style.left = (window.scrollX + rect.left) + "px";
+    }
 
-          nameCell.addEventListener("mouseleave", () => {
-            if (!nameCell.classList.contains("clicked")) {
-              tooltip.classList.remove("show");
-            }
-          });
-
-          // Click to pin tooltip
-          nameCell.addEventListener("click", () => {
-            const clicked = document.querySelector("td.clicked");
-            if (clicked && clicked !== nameCell) {
-              clicked.classList.remove("clicked");
-            }
-
-            nameCell.classList.toggle("clicked");
-            tooltip.innerHTML = `
-              <strong>${planet["Planet Name"]}</strong><br>
-              Host: ${planet["Host name"]}<br>
-              Distance: ${planet["Distance [pc]"]} pc<br>
-              Radius: ${planet["Planet radius (earth radius)"]} R⊕
-            `;
-            tooltip.classList.add("show");
-            nameCell.appendChild(tooltip);
-          });
-
-          row.appendChild(nameCell);
-          row.innerHTML += `
-            <td>${planet["Host name"]}</td>
-            <td>${planet["Distance [pc]"]}</td>
-            <td>${planet["Planet radius (earth radius)"]}</td>
-            <td>${planet["Insolation Flux [Earth Flux]"]}</td>
-          `;
-
-          tbody.appendChild(row);
-        });
-      });
-
-    // Click outside to close pinned tooltip
-    document.addEventListener("click", e => {
-      const insideCell = e.target.closest("td");
-      if (!insideCell) {
-        const clickedCell = document.querySelector("td.clicked");
-        if (clickedCell) {
-          clickedCell.classList.remove("clicked");
-          const tooltipEl = clickedCell.querySelector(".tooltip");
-          if (tooltipEl) tooltipEl.classList.remove("show");
-        }
+    // Hover show
+    nameCell.addEventListener("mouseenter", () => {
+      if (!nameCell.classList.contains("clicked")) {
+        tooltip.innerHTML = `
+          <strong>${planet["Planet Name"]}</strong><br>
+          Host: ${planet["Host name"]}<br>
+          Distance: ${planet["Distance [pc]"]} pc<br>
+          Radius: ${planet["Planet radius (earth radius)"]} R⊕
+        `;
+        tooltip.classList.add("show");
+        positionTooltip();
       }
     });
-  </script>
+
+    nameCell.addEventListener("mouseleave", () => {
+      if (!nameCell.classList.contains("clicked")) {
+        tooltip.classList.remove("show");
+      }
+    });
+
+    // Click to pin tooltip
+    nameCell.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const clicked = document.querySelector("td.clicked");
+      if (clicked && clicked !== nameCell) clicked.classList.remove("clicked");
+
+      nameCell.classList.toggle("clicked");
+      tooltip.innerHTML = `
+        <strong>${planet["Planet Name"]}</strong><br>
+        Host: ${planet["Host name"]}<br>
+        Distance: ${planet["Distance [pc]"]} pc<br>
+        Radius: ${planet["Planet radius (earth radius)"]} R⊕
+      `;
+      tooltip.classList.add("show");
+      positionTooltip();
+    });
+
+    row.appendChild(nameCell);
+    row.innerHTML += `
+      <td>${planet["Host name"]}</td>
+      <td>${planet["Distance [pc]"]}</td>
+      <td>${planet["Planet radius (earth radius)"]}</td>
+      <td>${planet["Insolation Flux [Earth Flux]"]}</td>
+    `;
+    tbody.appendChild(row);
+  });
+});
+
+// Close pinned tooltip when clicking outside
+document.addEventListener("click", () => {
+  const clickedCell = document.querySelector("td.clicked");
+  if (clickedCell) {
+    clickedCell.classList.remove("clicked");
+    tooltip.classList.remove("show");
+  }
+});
+
+// Update tooltip position on scroll
+window.addEventListener("scroll", () => {
+  const clickedCell = document.querySelector("td.clicked");
+  if (clickedCell) {
+    const rect = clickedCell.getBoundingClientRect();
+    tooltip.style.top = (window.scrollY + rect.bottom + 5) + "px";
+    tooltip.style.left = (window.scrollX + rect.left) + "px";
+  }
+});
+</script>
 </body>
 </html>
