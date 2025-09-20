@@ -59,10 +59,8 @@ th, td {
 }
 
 th {
-  background-color: #B69FD5;
-  color: white;
-  position: relative;
-  user-select: none;
+  background-color: #B69FD5 !important;
+  color: white !important;
 }
 
 tr:nth-child(even) {
