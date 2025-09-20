@@ -57,7 +57,6 @@
         data.forEach(planet => {
           const row = document.createElement("tr");
 
-          // Planet name cell
           const nameCell = document.createElement("td");
           const nameSpan = document.createElement("span");
           nameSpan.textContent = planet["Planet Name"];
@@ -71,7 +70,6 @@
           nameCell.appendChild(tooltip);
           row.appendChild(nameCell);
 
-          // Other columns
           ["Host name","Distance [pc]","Planet radius (earth radius)","Insolation Flux [Earth Flux]"].forEach(col => {
             const td = document.createElement("td");
             td.textContent = planet[col];
@@ -80,10 +78,38 @@
 
           tbody.appendChild(row);
 
+          // Helper: position tooltip near the name span
+          function positionTooltip() {
+            const rect = nameSpan.getBoundingClientRect();
+            const scrollY = window.scrollY || window.pageYOffset;
+            const scrollX = window.scrollX || window.pageXOffset;
+            const tooltipHeight = tooltip.offsetHeight;
+            const tooltipWidth = tooltip.offsetWidth;
+            const viewportHeight = window.innerHeight;
+            const viewportWidth = window.innerWidth;
+
+            let top = rect.bottom + scrollY + 5; // below by default
+            let left = rect.left + scrollX;
+
+            // If tooltip would go below viewport, place above
+            if(top + tooltipHeight > scrollY + viewportHeight) {
+              top = rect.top + scrollY - tooltipHeight - 5;
+            }
+
+            // If tooltip would go off right edge
+            if(left + tooltipWidth > scrollX + viewportWidth) {
+              left = viewportWidth - tooltipWidth - 10 + scrollX;
+            }
+
+            tooltip.style.top = top + "px";
+            tooltip.style.left = left + "px";
+          }
+
           // Hover: temporary tooltip
           nameSpan.addEventListener("mouseenter", async () => {
             if(openTooltip !== tooltip){ 
               tooltip.style.display = "block";
+              positionTooltip();
               tooltip.innerHTML = "Loading...";
               const info = await fetchPlanetData(nameSpan.dataset.name);
               if(info){
@@ -124,6 +150,8 @@
               openTooltip = tooltip;
               openName = nameSpan;
 
+              positionTooltip();
+
               tooltip.innerHTML = "Loading...";
               const info = await fetchPlanetData(nameSpan.dataset.name);
               if(info){
@@ -139,12 +167,10 @@
           });
 
           // Prevent closing tooltip when clicking inside it
-          tooltip.addEventListener("click", (e) => {
-            e.stopPropagation();
-          });
+          tooltip.addEventListener("click", (e) => e.stopPropagation());
         });
 
-        // Close tooltip when clicking anywhere else
+        // Click outside to close
         document.addEventListener("click", () => {
           if(openTooltip){
             openTooltip.style.display = "none";
