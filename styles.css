@@ -43,7 +43,7 @@ section {
 
 h2 {
   margin-bottom: 10px;
-  color: #0077cc;
+  color: #B69FD5;
 }
 
 table {
@@ -59,7 +59,7 @@ th, td {
 }
 
 th {
-  background-color: #0077cc;
+  background-color: #B69FD5;
   color: white;
   user-select: none;
 }
@@ -92,7 +92,7 @@ footer {
 }
 
 .planet-name.selected {
-  background-color: #0077cc;
+  background-color: #B69FD5;
   color: white;
   padding: 2px 4px;
   border-radius: 4px;
@@ -103,7 +103,7 @@ footer {
   display: none;
   position: absolute;
   background-color: #fff;
-  border: 1px solid #0077cc;
+  border: 1px solid #B69FD5;
   padding: 10px;
   max-width: 250px;
   max-height: 250px;
