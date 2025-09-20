@@ -53,6 +53,7 @@
       .then(response => response.json())
       .then(data => {
         const tbody = document.querySelector("#planet-table tbody");
+
         data.forEach(planet => {
           const row = document.createElement("tr");
 
@@ -79,21 +80,44 @@
 
           tbody.appendChild(row);
 
-          // Click event for persistent tooltip
+          // Hover: temporary tooltip
+          nameSpan.addEventListener("mouseenter", async () => {
+            if(openTooltip !== tooltip){ // only if not clicked
+              tooltip.innerHTML = "Loading...";
+              tooltip.style.display = "block";
+              const info = await fetchPlanetData(nameSpan.dataset.name);
+              if(info){
+                tooltip.innerHTML = `
+                  <strong>${info.title}</strong><br>
+                  ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
+                  <div class="tooltip-text">${info.extract}</div>
+                `;
+              } else {
+                tooltip.innerHTML = "<p>No information available</p>";
+              }
+            }
+          });
+
+          nameSpan.addEventListener("mouseleave", () => {
+            if(openTooltip !== tooltip){ // only hide if not clicked
+              tooltip.style.display = "none";
+            }
+          });
+
+          // Click: persistent tooltip
           nameSpan.addEventListener("click", async () => {
-            // Close previous tooltip if open
+            // Close previous clicked tooltip
             if(openTooltip && openTooltip !== tooltip){
               openTooltip.style.display = "none";
               openName.classList.remove("selected");
             }
 
-            // Toggle current tooltip
-            if(tooltip.style.display === "block"){
+            if(openTooltip === tooltip){ // toggle off if clicked again
               tooltip.style.display = "none";
               nameSpan.classList.remove("selected");
               openTooltip = null;
               openName = null;
-            } else {
+            } else { // open clicked tooltip
               tooltip.innerHTML = "Loading...";
               tooltip.style.display = "block";
               nameSpan.classList.add("selected");
