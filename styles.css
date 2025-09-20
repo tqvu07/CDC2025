@@ -82,36 +82,41 @@ footer {
 /* Planet name styling */
 .planet-name {
   cursor: pointer;
+  display: inline-block;
+  color: #0077cc;
 }
 
 .planet-name.selected {
   background-color: #0077cc;
   color: white;
-  padding: 2px 4px;
+  padding: 2px 6px;
   border-radius: 4px;
 }
 
-/* Tooltip styling */
+/* Tooltip styling: thinner and scrollable */
 .tooltip {
   display: none;
-  position: absolute; /* positioned relative to viewport */
+  position: absolute; /* positioned relative to viewport via JS */
   background-color: #fff;
   border: 1px solid #0077cc;
   padding: 10px;
-  max-width: 300px;
-  max-height: 400px;
+  width: 260px;          /* narrower fixed width */
+  max-width: 260px;
+  max-height: 320px;     /* scrollable if content tall */
   overflow-y: auto;
+  overflow-x: hidden;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
   z-index: 1000;
+  word-wrap: break-word;
 }
 
 .tooltip img {
   max-width: 100%;
   height: auto;
-  margin-bottom: 5px;
+  margin: 6px 0;
 }
 
 .tooltip-text {
-  max-height: 200px;
+  max-height: 220px;
   overflow-y: auto;
 }

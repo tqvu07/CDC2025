@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CDC Planet Habitability</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -35,131 +35,208 @@
   </footer>
 
   <script>
-    let openTooltip = null;
-    let openName = null;
+    // Globals
+    let openTooltip = null;  // tooltip element when pinned
+    let openName = null;     // currently selected name span
     let sortDirection = {};
+    let planetsData = [];
 
+    // Create single tooltip appended to body
+    const tooltip = document.createElement("div");
+    tooltip.className = "tooltip";
+    document.body.appendChild(tooltip);
+
+    // Prevent clicks inside tooltip from closing it
+    tooltip.addEventListener("click", (e) => e.stopPropagation());
+
+    // Fetch wiki summary (cache results)
+    const wikiCache = new Map();
     async function fetchPlanetData(name){
+      if (!name) return null;
+      if (wikiCache.has(name)) return wikiCache.get(name);
       const urlName = name.replace(/\s+/g,'_');
       try{
-        const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${urlName}`);
-        return await res.json();
+        const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(urlName)}`);
+        if (!res.ok) {
+          wikiCache.set(name, null);
+          return null;
+        }
+        const json = await res.json();
+        wikiCache.set(name, json);
+        return json;
       } catch {
+        wikiCache.set(name, null);
         return null;
       }
     }
 
-    function attachTooltipEvents(nameSpan, tooltip){
+    // Position tooltip under a given element (keeps it within viewport horizontally)
+    function positionTooltipFor(el) {
+      const rect = el.getBoundingClientRect();
+      const top = window.scrollY + rect.bottom + 6;
+      // default left is element left
+      let left = window.scrollX + rect.left;
+      // ensure tooltip won't overflow to the right
+      const maxRight = window.scrollX + window.innerWidth - 12;
+      // set temporary display so offsetWidth is measurable
+      tooltip.style.display = 'block';
+      // ensure width is respected by CSS; measure now
+      const tw = tooltip.offsetWidth || 260;
+      if (left + tw > maxRight) {
+        left = maxRight - tw;
+        if (left < window.scrollX + 6) left = window.scrollX + 6;
+      }
+      tooltip.style.top = `${top}px`;
+      tooltip.style.left = `${left}px`;
+    }
+
+    // Show tooltip content for a nameSpan + planet object
+    async function showTooltipFor(nameSpan, planet) {
+      tooltip.innerHTML = "Loading...";
+      positionTooltipFor(nameSpan);
+
+      const info = await fetchPlanetData(nameSpan.dataset.name);
+      if (info && info.extract) {
+        tooltip.innerHTML = `
+          <strong>${info.title || nameSpan.dataset.name}</strong>
+          ${info.thumbnail ? `<div class="thumb"><img src="${info.thumbnail.source}" alt="${info.title || ''}" /></div>` : ''}
+          <div class="tooltip-text">${info.extract}</div>
+        `;
+      } else {
+        // fallback to planet fields
+        tooltip.innerHTML = `
+          <strong>${planet["Planet Name"] || nameSpan.dataset.name}</strong>
+          <div class="tooltip-text">
+            Host: ${planet["Host name"] || ''}<br>
+            Distance: ${planet["Distance [pc]"] || ''} pc<br>
+            Radius: ${planet["Planet radius (earth radius)"] || ''} R⊕<br>
+            Insolation: ${planet["Insolation Flux [Earth Flux]"] || ''}
+          </div>
+        `;
+      }
+      // reposition after content loads (thumbnail may change width)
+      positionTooltipFor(nameSpan);
+    }
+
+    // Attach events for hover/click
+    function attachTooltipEvents(nameSpan, planet) {
       nameSpan.addEventListener("mouseenter", async () => {
-        if(openTooltip !== tooltip){
-          const rect = nameSpan.getBoundingClientRect();
-          tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
-          tooltip.style.left = `${rect.left + window.scrollX}px`;
-          tooltip.style.display = "block";
-          tooltip.innerHTML = "Loading...";
-          const info = await fetchPlanetData(nameSpan.dataset.name);
-          tooltip.innerHTML = info ? `
-            <strong>${info.title}</strong><br>
-            ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
-            <div class="tooltip-text">${info.extract}</div>
-          ` : "<p>No information available</p>";
+        if (openName !== nameSpan) {
+          await showTooltipFor(nameSpan, planet);
+          // show only temporarily (unless pinned)
+          if (openName !== nameSpan) tooltip.style.display = "block";
         }
       });
 
       nameSpan.addEventListener("mouseleave", () => {
-        if(openTooltip !== tooltip){
+        if (openName !== nameSpan) {
           tooltip.style.display = "none";
         }
       });
 
       nameSpan.addEventListener("click", async (e) => {
-        e.stopPropagation();
-        if(openTooltip && openTooltip !== tooltip){
+        e.stopPropagation(); // prevent document click handler
+        // toggle pinned state
+        if (openName === nameSpan) {
+          // unpin
+          nameSpan.classList.remove("selected");
+          openName = null;
           tooltip.style.display = "none";
-          openName.classList.remove("selected");
+        } else {
+          // unpin previous
+          if (openName) openName.classList.remove("selected");
+          openName = nameSpan;
+          nameSpan.classList.add("selected");
+          await showTooltipFor(nameSpan, planet);
+          // ensure it's visible (pinned)
+          tooltip.style.display = "block";
         }
-        const rect = nameSpan.getBoundingClientRect();
-        tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
-        tooltip.style.left = `${rect.left + window.scrollX}px`;
-        tooltip.style.display = "block";
-        nameSpan.classList.add("selected");
-        openTooltip = tooltip;
-        openName = nameSpan;
-        tooltip.innerHTML = "Loading...";
-        const info = await fetchPlanetData(nameSpan.dataset.name);
-        tooltip.innerHTML = info ? `
-          <strong>${info.title}</strong><br>
-          ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
-          <div class="tooltip-text">${info.extract}</div>
-        ` : "<p>No information available</p>";
       });
     }
 
-    document.addEventListener("click", () => {
-      if(openTooltip){
-        openTooltip.style.display = "none";
+    // Build table rows from data array
+    function buildTable(data) {
+      const tbody = document.querySelector("#planet-table tbody");
+      tbody.innerHTML = "";
+      data.forEach(planet => {
+        const row = document.createElement("tr");
+
+        // Name cell (span)
+        const nameCell = document.createElement("td");
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "planet-name";
+        nameSpan.textContent = planet["Planet Name"] || "";
+        nameSpan.dataset.name = planet["Planet Name"] || "";
+        nameCell.appendChild(nameSpan);
+        row.appendChild(nameCell);
+
+        // Other columns
+        ["Host name","Distance [pc]","Planet radius (earth radius)","Insolation Flux [Earth Flux]"].forEach(col => {
+          const td = document.createElement("td");
+          td.textContent = (planet[col] !== undefined && planet[col] !== null) ? planet[col] : "";
+          row.appendChild(td);
+        });
+
+        tbody.appendChild(row);
+        attachTooltipEvents(nameSpan, planet);
+      });
+    }
+
+    // Sorting: add click handlers to headers with data-key
+    function enableSorting() {
+      document.querySelectorAll("th.sortable").forEach(th => {
+        const key = th.dataset.key;
+        if (!key) return;
+        th.addEventListener("click", () => {
+          const ascending = !sortDirection[key];
+          sortDirection[key] = ascending;
+          planetsData.sort((a,b) => {
+            const A = a[key];
+            const B = b[key];
+            const nA = parseFloat(String(A).replace(/[^0-9eE\.\-+]/g,'')); // try numeric
+            const nB = parseFloat(String(B).replace(/[^0-9eE\.\-+]/g,''));
+            if (!Number.isNaN(nA) && !Number.isNaN(nB)) {
+              return ascending ? nA - nB : nB - nA;
+            }
+            const sA = String(A || '').toLowerCase();
+            const sB = String(B || '').toLowerCase();
+            return ascending ? (sA.localeCompare(sB)) : (sB.localeCompare(sA));
+          });
+          // rebuild table
+          buildTable(planetsData);
+          // update header classes
+          document.querySelectorAll("th.sortable").forEach(h => h.classList.remove("asc","desc"));
+          th.classList.add(ascending ? "asc" : "desc");
+        });
+      });
+    }
+
+    // Load JSON and initialize UI
+    fetch("hz_planets.json")
+      .then(r => r.json())
+      .then(json => {
+        planetsData = Array.isArray(json) ? json : [];
+        buildTable(planetsData);
+        enableSorting();
+      })
+      .catch(err => {
+        console.error("Failed to load hz_planets.json", err);
+      });
+
+    // Click outside closes pinned tooltip and removes selection
+    document.addEventListener("click", (e) => {
+      if (openName) {
+        // if click inside tooltip or inside the openName, ignore
+        if (e.target.closest('.tooltip') || e.target.closest('.planet-name') === openName) return;
         openName.classList.remove("selected");
-        openTooltip = null;
         openName = null;
+        tooltip.style.display = "none";
       }
     });
 
-    fetch("hz_planets.json")
-      .then(res => res.json())
-      .then(data => {
-        const tbody = document.querySelector("#planet-table tbody");
-        const tooltip = document.createElement("div");
-        tooltip.classList.add("tooltip");
-        document.body.appendChild(tooltip);
-
-        function buildTable(data){
-          tbody.innerHTML = "";
-          data.forEach(planet => {
-            const row = document.createElement("tr");
-
-            const nameCell = document.createElement("td");
-            const nameSpan = document.createElement("span");
-            nameSpan.textContent = planet["Planet Name"];
-            nameSpan.classList.add("planet-name");
-            nameSpan.dataset.name = planet["Planet Name"];
-            nameCell.appendChild(nameSpan);
-            row.appendChild(nameCell);
-
-            ["Host name","Distance [pc]","Planet radius (earth radius)","Insolation Flux [Earth Flux]"].forEach(col => {
-              const td = document.createElement("td");
-              td.textContent = planet[col];
-              row.appendChild(td);
-            });
-
-            tbody.appendChild(row);
-            attachTooltipEvents(nameSpan, tooltip);
-          });
-        }
-
-        buildTable(data);
-
-        // Sorting functionality
-        document.querySelectorAll("th.sortable").forEach(th => {
-          th.addEventListener("click", () => {
-            const key = th.dataset.key;
-            const ascending = !sortDirection[key];
-            sortDirection[key] = ascending;
-
-            data.sort((a,b) => {
-              const valA = a[key];
-              const valB = b[key];
-              if(!isNaN(valA) && !isNaN(valB)){
-                return ascending ? valA - valB : valB - valA;
-              } else {
-                return ascending ? String(valA).localeCompare(String(valB))
-                                 : String(valB).localeCompare(String(valA));
-              }
-            });
-
-            buildTable(data);
-          });
-        });
-      });
+    // Reposition pinned tooltip on scroll/resize
+    window.addEventListener("scroll", () => { if (openName) positionTooltipFor(openName); });
+    window.addEventListener("resize", () => { if (openName) positionTooltipFor(openName); });
   </script>
 </body>
 </html>
