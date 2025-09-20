@@ -74,18 +74,19 @@ footer {
   color: #777;
 }
 
-/* Make table cells relative so tooltip positions inside the cell */
-td {
-  position: relative;
+/* Wrapper around planet name for tooltip */
+.name-container {
+  position: relative;      /* tooltip positions relative to this container */
+  display: inline-block;   /* shrink to content width */
 }
 
 /* Tooltip styling */
 .tooltip {
   display: none;
-  position: absolute; /* relative to td */
-  top: 100%;          /* directly below the planet name */
+  position: absolute; /* relative to .name-container */
+  top: 100%;          /* directly below planet name */
   left: 0;
-  margin-top: 5px;    /* spacing below name */
+  margin-top: 5px;
   background-color: #fff;
   border: 1px solid #0077cc;
   padding: 10px;
@@ -96,7 +97,7 @@ td {
   z-index: 1000;
 }
 
-/* Highlight selected planet */
+/* Highlight clicked planet */
 .planet-name.selected {
   background-color: #0077cc;
   color: white;
@@ -105,7 +106,7 @@ td {
   cursor: pointer;
 }
 
-/* Tooltip image responsiveness */
+/* Tooltip image responsive */
 .tooltip img {
   max-width: 100%;
   height: auto;
