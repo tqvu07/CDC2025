@@ -78,38 +78,10 @@
 
           tbody.appendChild(row);
 
-          // Helper: position tooltip near the name span
-          function positionTooltip() {
-            const rect = nameSpan.getBoundingClientRect();
-            const scrollY = window.scrollY || window.pageYOffset;
-            const scrollX = window.scrollX || window.pageXOffset;
-            const tooltipHeight = tooltip.offsetHeight;
-            const tooltipWidth = tooltip.offsetWidth;
-            const viewportHeight = window.innerHeight;
-            const viewportWidth = window.innerWidth;
-
-            let top = rect.bottom + scrollY + 5; // below by default
-            let left = rect.left + scrollX;
-
-            // If tooltip would go below viewport, place above
-            if(top + tooltipHeight > scrollY + viewportHeight) {
-              top = rect.top + scrollY - tooltipHeight - 5;
-            }
-
-            // If tooltip would go off right edge
-            if(left + tooltipWidth > scrollX + viewportWidth) {
-              left = viewportWidth - tooltipWidth - 10 + scrollX;
-            }
-
-            tooltip.style.top = top + "px";
-            tooltip.style.left = left + "px";
-          }
-
           // Hover: temporary tooltip
           nameSpan.addEventListener("mouseenter", async () => {
             if(openTooltip !== tooltip){ 
               tooltip.style.display = "block";
-              positionTooltip();
               tooltip.innerHTML = "Loading...";
               const info = await fetchPlanetData(nameSpan.dataset.name);
               if(info){
@@ -149,8 +121,6 @@
               nameSpan.classList.add("selected");
               openTooltip = tooltip;
               openName = nameSpan;
-
-              positionTooltip();
 
               tooltip.innerHTML = "Loading...";
               const info = await fetchPlanetData(nameSpan.dataset.name);

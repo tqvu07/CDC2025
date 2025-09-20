@@ -74,10 +74,18 @@ footer {
   color: #777;
 }
 
+/* Make table cells relative so tooltip can position inside */
+td {
+  position: relative;
+}
+
 /* Tooltip styling */
 .tooltip {
   display: none;
-  position: absolute; /* relative to its parent td or span */
+  position: absolute; /* relative to td */
+  top: 100%;          /* directly below planet name */
+  left: 0;
+  margin-top: 5px;    /* spacing below name */
   background-color: #fff;
   border: 1px solid #0077cc;
   padding: 10px;
@@ -86,9 +94,6 @@ footer {
   overflow-y: auto;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
   z-index: 1000;
-  top: 100%; /* directly below the parent span */
-  left: 0;
-  margin-top: 5px; /* spacing */
 }
 
 /* Highlight selected planet */
