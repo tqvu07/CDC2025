@@ -14,20 +14,43 @@
 
   <main>
     <section class="info">
-      <h2>About This Project</h2>
-      <p>This website shows planetary data and helps you find habitable planets.</p>
-    </section>
-
-    <section class="example">
-      <h2>Example Planet</h2>
-      <p>Name: Planet X</p>
-      <p>Distance from Earth: 50 light-years</p>
-      <p>Habitable Zone: Yes</p>
+      <h2>Habitable Zone Planets</h2>
+      <table id="planet-table">
+        <thead>
+          <tr>
+            <th>Planet Name</th>
+            <th>Host Name</th>
+            <th>Distance (pc)</th>
+            <th>Radius (Earth)</th>
+            <th>Insolation Flux</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </section>
   </main>
 
   <footer>
     <p>© 2025 CDC Planet Habitability</p>
   </footer>
+
+  <script>
+    fetch("hz_planets.json")
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.querySelector("#planet-table tbody");
+        data.forEach(planet => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${planet["Planet Name"]}</td>
+            <td>${planet["Host name"]}</td>
+            <td>${planet["Distance [pc]"]}</td>
+            <td>${planet["Planet radius (earth radius)"]}</td>
+            <td>${planet["Insolation Flux [Earth Flux]"]}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      });
+  </script>
 </body>
 </html>
