@@ -15,20 +15,18 @@
   <main>
     <section class="info">
       <h2>Habitable Zone Planets</h2>
-      <div class="table-container">
-        <table id="planet-table">
-          <thead>
-            <tr>
-              <th data-key="Planet Name">Planet Name</th>
-              <th data-key="Host name">Host Name</th>
-              <th data-key="Distance [pc]">Distance (pc)</th>
-              <th data-key="Planet radius (earth radius)">Radius (Earth)</th>
-              <th data-key="Semi-major Axis (AU)">Semi-major Axis (AU)</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+      <table id="planet-table">
+        <thead>
+          <tr>
+            <th class="sortable" data-key="Planet Name">Planet Name</th>
+            <th class="sortable" data-key="Host name">Host Name</th>
+            <th class="sortable" data-key="Distance [pc]">Distance (pc)</th>
+            <th class="sortable" data-key="Planet radius (earth radius)">Radius (Earth)</th>
+            <th class="sortable" data-key="Insolation Flux [Earth Flux]">Insolation Flux</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </section>
   </main>
 
@@ -37,82 +35,131 @@
   </footer>
 
   <script>
-    // Create one tooltip element to use for all cells
-    const tooltip = document.createElement("div");
-    tooltip.className = "tooltip";
-    document.body.appendChild(tooltip);
+    let openTooltip = null;
+    let openName = null;
+    let sortDirection = {};
 
-    fetch("hz_planets.json")
-      .then(response => response.json())
-      .then(data => {
-        const tbody = document.querySelector("#planet-table tbody");
+    async function fetchPlanetData(name){
+      const urlName = name.replace(/\s+/g,'_');
+      try{
+        const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${urlName}`);
+        return await res.json();
+      } catch {
+        return null;
+      }
+    }
 
-        data.forEach(planet => {
-          const row = document.createElement("tr");
-          const nameCell = document.createElement("td");
-          nameCell.textContent = planet["Planet Name"];
-          nameCell.style.cursor = "pointer";
-
-          // Hover tooltip
-          nameCell.addEventListener("mouseenter", () => {
-            if (!nameCell.classList.contains("clicked")) {
-              tooltip.innerHTML = `
-                <strong>${planet["Planet Name"]}</strong><br>
-                Host: ${planet["Host name"]}<br>
-                Distance: ${planet["Distance [pc]"]} pc<br>
-                Radius: ${planet["Planet radius (earth radius)"]} R⊕
-              `;
-              tooltip.classList.add("show");
-              nameCell.appendChild(tooltip);
-            }
-          });
-
-          nameCell.addEventListener("mouseleave", () => {
-            if (!nameCell.classList.contains("clicked")) {
-              tooltip.classList.remove("show");
-            }
-          });
-
-          // Click to pin tooltip
-          nameCell.addEventListener("click", () => {
-            const currentlyClicked = document.querySelector("td.clicked");
-            if (currentlyClicked && currentlyClicked !== nameCell) {
-              currentlyClicked.classList.remove("clicked");
-            }
-
-            nameCell.classList.toggle("clicked");
-            tooltip.innerHTML = `
-              <strong>${planet["Planet Name"]}</strong><br>
-              Host: ${planet["Host name"]}<br>
-              Distance: ${planet["Distance [pc]"]} pc<br>
-              Radius: ${planet["Planet radius (earth radius)"]} R⊕
-            `;
-            tooltip.classList.add("show");
-            nameCell.appendChild(tooltip);
-          });
-
-          row.appendChild(nameCell);
-          row.innerHTML += `
-            <td>${planet["Host name"]}</td>
-            <td>${planet["Distance [pc]"]}</td>
-            <td>${planet["Planet radius (earth radius)"]}</td>
-            <td>${planet["Semi-major Axis (AU)"]}</td>
-          `;
-          tbody.appendChild(row);
-        });
+    function attachTooltipEvents(nameSpan, tooltip){
+      nameSpan.addEventListener("mouseenter", async () => {
+        if(openTooltip !== tooltip){
+          const rect = nameSpan.getBoundingClientRect();
+          tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
+          tooltip.style.left = `${rect.left + window.scrollX}px`;
+          tooltip.style.display = "block";
+          tooltip.innerHTML = "Loading...";
+          const info = await fetchPlanetData(nameSpan.dataset.name);
+          tooltip.innerHTML = info ? `
+            <strong>${info.title}</strong><br>
+            ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
+            <div class="tooltip-text">${info.extract}</div>
+          ` : "<p>No information available</p>";
+        }
       });
 
-    // Click outside to unpin tooltip
-    document.addEventListener("click", e => {
-      const clickedInside = e.target.closest("td");
-      if (!clickedInside) {
-        const clickedCell = document.querySelector("td.clicked");
-        if (clickedCell) {
-          clickedCell.classList.remove("clicked");
-          tooltip.classList.remove("show");
+      nameSpan.addEventListener("mouseleave", () => {
+        if(openTooltip !== tooltip){
+          tooltip.style.display = "none";
         }
+      });
+
+      nameSpan.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if(openTooltip && openTooltip !== tooltip){
+          tooltip.style.display = "none";
+          openName.classList.remove("selected");
+        }
+        const rect = nameSpan.getBoundingClientRect();
+        tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
+        tooltip.style.left = `${rect.left + window.scrollX}px`;
+        tooltip.style.display = "block";
+        nameSpan.classList.add("selected");
+        openTooltip = tooltip;
+        openName = nameSpan;
+        tooltip.innerHTML = "Loading...";
+        const info = await fetchPlanetData(nameSpan.dataset.name);
+        tooltip.innerHTML = info ? `
+          <strong>${info.title}</strong><br>
+          ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
+          <div class="tooltip-text">${info.extract}</div>
+        ` : "<p>No information available</p>";
+      });
+    }
+
+    document.addEventListener("click", () => {
+      if(openTooltip){
+        openTooltip.style.display = "none";
+        openName.classList.remove("selected");
+        openTooltip = null;
+        openName = null;
       }
     });
+
+    fetch("hz_planets.json")
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector("#planet-table tbody");
+        const tooltip = document.createElement("div");
+        tooltip.classList.add("tooltip");
+        document.body.appendChild(tooltip);
+
+        function buildTable(data){
+          tbody.innerHTML = "";
+          data.forEach(planet => {
+            const row = document.createElement("tr");
+
+            const nameCell = document.createElement("td");
+            const nameSpan = document.createElement("span");
+            nameSpan.textContent = planet["Planet Name"];
+            nameSpan.classList.add("planet-name");
+            nameSpan.dataset.name = planet["Planet Name"];
+            nameCell.appendChild(nameSpan);
+            row.appendChild(nameCell);
+
+            ["Host name","Distance [pc]","Planet radius (earth radius)","Insolation Flux [Earth Flux]"].forEach(col => {
+              const td = document.createElement("td");
+              td.textContent = planet[col];
+              row.appendChild(td);
+            });
+
+            tbody.appendChild(row);
+            attachTooltipEvents(nameSpan, tooltip);
+          });
+        }
+
+        buildTable(data);
+
+        // Sorting functionality
+        document.querySelectorAll("th.sortable").forEach(th => {
+          th.addEventListener("click", () => {
+            const key = th.dataset.key;
+            const ascending = !sortDirection[key];
+            sortDirection[key] = ascending;
+
+            data.sort((a,b) => {
+              const valA = a[key];
+              const valB = b[key];
+              if(!isNaN(valA) && !isNaN(valB)){
+                return ascending ? valA - valB : valB - valA;
+              } else {
+                return ascending ? String(valA).localeCompare(String(valB))
+                                 : String(valB).localeCompare(String(valA));
+              }
+            });
+
+            buildTable(data);
+          });
+        });
+      });
   </script>
 </body>
 </html>
