@@ -34,122 +34,126 @@
     <p>© 2025 CDC Planet Habitability</p>
   </footer>
 
-<script>
-  let openTooltip = null;
-  let openName = null;
+  <script>
+    let openTooltip = null;
+    let openName = null;
 
-  async function fetchPlanetData(name) {
-    const urlName = name.replace(/\s+/g, '_');
-    try {
-      const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${urlName}`);
-      const data = await response.json();
-      return data;
-    } catch {
-      return null;
+    async function fetchPlanetData(name) {
+      const urlName = name.replace(/\s+/g, '_');
+      try {
+        const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${urlName}`);
+        const data = await response.json();
+        return data;
+      } catch {
+        return null;
+      }
     }
-  }
 
-  fetch("hz_planets.json")
-    .then(response => response.json())
-    .then(data => {
-      const tbody = document.querySelector("#planet-table tbody");
+    fetch("hz_planets.json")
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.querySelector("#planet-table tbody");
 
-      data.forEach(planet => {
-        const row = document.createElement("tr");
+        data.forEach(planet => {
+          const row = document.createElement("tr");
 
-        // Planet name cell
-        const nameCell = document.createElement("td");
-        const nameSpan = document.createElement("span");
-        nameSpan.textContent = planet["Planet Name"];
-        nameSpan.classList.add("planet-name");
-        nameSpan.dataset.name = planet["Planet Name"];
+          // Planet name cell
+          const nameCell = document.createElement("td");
+          const nameSpan = document.createElement("span");
+          nameSpan.textContent = planet["Planet Name"];
+          nameSpan.classList.add("planet-name");
+          nameSpan.dataset.name = planet["Planet Name"];
 
-        const tooltip = document.createElement("div");
-        tooltip.classList.add("tooltip");
+          const tooltip = document.createElement("div");
+          tooltip.classList.add("tooltip");
 
-        nameCell.appendChild(nameSpan);
-        nameCell.appendChild(tooltip);
-        row.appendChild(nameCell);
+          nameCell.appendChild(nameSpan);
+          nameCell.appendChild(tooltip);
+          row.appendChild(nameCell);
 
-        // Other columns
-        ["Host name","Distance [pc]","Planet radius (earth radius)","Insolation Flux [Earth Flux]"].forEach(col => {
-          const td = document.createElement("td");
-          td.textContent = planet[col];
-          row.appendChild(td);
-        });
+          // Other columns
+          ["Host name","Distance [pc]","Planet radius (earth radius)","Insolation Flux [Earth Flux]"].forEach(col => {
+            const td = document.createElement("td");
+            td.textContent = planet[col];
+            row.appendChild(td);
+          });
 
-        tbody.appendChild(row);
+          tbody.appendChild(row);
 
-        // Hover: temporary tooltip
-        nameSpan.addEventListener("mouseenter", async () => {
-          if(openTooltip !== tooltip){ // only if not clicked
-            tooltip.innerHTML = "Loading...";
-            tooltip.style.display = "block";
-            const info = await fetchPlanetData(nameSpan.dataset.name);
-            if(info){
-              tooltip.innerHTML = `
-                <strong>${info.title}</strong><br>
-                ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
-                <div class="tooltip-text">${info.extract}</div>
-              `;
-            } else {
-              tooltip.innerHTML = "<p>No information available</p>";
+          // Hover: temporary tooltip
+          nameSpan.addEventListener("mouseenter", async () => {
+            if(openTooltip !== tooltip){ 
+              tooltip.style.display = "block";
+              tooltip.innerHTML = "Loading...";
+              const info = await fetchPlanetData(nameSpan.dataset.name);
+              if(info){
+                tooltip.innerHTML = `
+                  <strong>${info.title}</strong><br>
+                  ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
+                  <div class="tooltip-text">${info.extract}</div>
+                `;
+              } else {
+                tooltip.innerHTML = "<p>No information available</p>";
+              }
             }
-          }
+          });
+
+          nameSpan.addEventListener("mouseleave", () => {
+            if(openTooltip !== tooltip){
+              tooltip.style.display = "none";
+            }
+          });
+
+          // Click: persistent tooltip
+          nameSpan.addEventListener("click", async (e) => {
+            e.stopPropagation();
+
+            if(openTooltip && openTooltip !== tooltip){
+              openTooltip.style.display = "none";
+              openName.classList.remove("selected");
+            }
+
+            if(openTooltip === tooltip){
+              tooltip.style.display = "none";
+              nameSpan.classList.remove("selected");
+              openTooltip = null;
+              openName = null;
+            } else {
+              tooltip.style.display = "block";
+              nameSpan.classList.add("selected");
+              openTooltip = tooltip;
+              openName = nameSpan;
+
+              tooltip.innerHTML = "Loading...";
+              const info = await fetchPlanetData(nameSpan.dataset.name);
+              if(info){
+                tooltip.innerHTML = `
+                  <strong>${info.title}</strong><br>
+                  ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
+                  <div class="tooltip-text">${info.extract}</div>
+                `;
+              } else {
+                tooltip.innerHTML = "<p>No information available</p>";
+              }
+            }
+          });
+
+          // Prevent closing tooltip when clicking inside it
+          tooltip.addEventListener("click", (e) => {
+            e.stopPropagation();
+          });
         });
 
-        nameSpan.addEventListener("mouseleave", () => {
-          if(openTooltip !== tooltip){ // only hide if not clicked
-            tooltip.style.display = "none";
-          }
-        });
-
-        // Click: persistent tooltip
-        nameSpan.addEventListener("click", async (e) => {
-          e.stopPropagation(); // prevent document click from immediately closing it
-
-          // Close previous clicked tooltip
-          if(openTooltip && openTooltip !== tooltip){
+        // Close tooltip when clicking anywhere else
+        document.addEventListener("click", () => {
+          if(openTooltip){
             openTooltip.style.display = "none";
             openName.classList.remove("selected");
-          }
-
-          if(openTooltip === tooltip){ // toggle off if clicked again
-            tooltip.style.display = "none";
-            nameSpan.classList.remove("selected");
             openTooltip = null;
             openName = null;
-          } else { // open clicked tooltip
-            tooltip.innerHTML = "Loading...";
-            tooltip.style.display = "block";
-            nameSpan.classList.add("selected");
-            openTooltip = tooltip;
-            openName = nameSpan;
-
-            const info = await fetchPlanetData(nameSpan.dataset.name);
-            if(info){
-              tooltip.innerHTML = `
-                <strong>${info.title}</strong><br>
-                ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
-                <div class="tooltip-text">${info.extract}</div>
-              `;
-            } else {
-              tooltip.innerHTML = "<p>No information available</p>";
-            }
           }
         });
       });
-
-      // Click anywhere outside to close tooltip
-      document.addEventListener("click", (e) => {
-        if(openTooltip && !openTooltip.contains(e.target) && !openName.contains(e.target)){
-          openTooltip.style.display = "none";
-          openName.classList.remove("selected");
-          openTooltip = null;
-          openName = null;
-        }
-      });
-    });
-</script>
+  </script>
 </body>
 </html>

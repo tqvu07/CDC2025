@@ -77,7 +77,7 @@ footer {
 /* Tooltip styling */
 .tooltip {
   display: none;
-  position: absolute;
+  position: fixed;
   background-color: #fff;
   border: 1px solid #0077cc;
   padding: 10px;
@@ -85,7 +85,7 @@ footer {
   max-height: 400px;
   overflow-y: auto;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  z-index: 100;
+  z-index: 1000;
 }
 
 /* Highlight selected planet */
