@@ -80,20 +80,21 @@ footer {
   color: #777;
 }
 
-/* Tooltip styling */
+/* Tooltip styling for desktop & mobile */
 .tooltip {
-  position: absolute;
-  background: rgba(255,255,255,0.95);
+  display: none;
+  background: #fff;
   border: 1px solid #ccc;
   padding: 8px;
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  display: none;
-  max-width: 90vw;
-  max-height: 70vh;
-  overflow-y: auto;
+  max-width: 90%;
   font-size: 0.9em;
-  z-index: 1000;
+  margin-top: 5px;
+}
+
+.tooltip.show {
+  display: block;
 }
 
 .tooltip img {

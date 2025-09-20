@@ -36,10 +36,11 @@
     <p>© 2025 CDC Planet Habitability</p>
   </footer>
 
-  <div class="tooltip" id="tooltip"></div>
-
   <script>
-    const tooltip = document.getElementById("tooltip");
+    // Create one tooltip element to use for all cells
+    const tooltip = document.createElement("div");
+    tooltip.className = "tooltip";
+    document.body.appendChild(tooltip);
 
     fetch("hz_planets.json")
       .then(response => response.json())
@@ -52,24 +53,23 @@
           nameCell.textContent = planet["Planet Name"];
           nameCell.style.cursor = "pointer";
 
-          // Hover tooltip (only shows if not pinned)
+          // Hover tooltip
           nameCell.addEventListener("mouseenter", () => {
             if (!nameCell.classList.contains("clicked")) {
               tooltip.innerHTML = `
                 <strong>${planet["Planet Name"]}</strong><br>
                 Host: ${planet["Host name"]}<br>
                 Distance: ${planet["Distance [pc]"]} pc<br>
-                Radius: ${planet["Planet radius (earth radius)"]} R⊕<br>
-                Semi-major Axis: ${planet["Semi-major Axis (AU)"]} AU
+                Radius: ${planet["Planet radius (earth radius)"]} R⊕
               `;
-              tooltip.style.display = "block";
-              positionTooltip(tooltip, nameCell);
+              tooltip.classList.add("show");
+              nameCell.appendChild(tooltip);
             }
           });
 
           nameCell.addEventListener("mouseleave", () => {
             if (!nameCell.classList.contains("clicked")) {
-              tooltip.style.display = "none";
+              tooltip.classList.remove("show");
             }
           });
 
@@ -85,11 +85,10 @@
               <strong>${planet["Planet Name"]}</strong><br>
               Host: ${planet["Host name"]}<br>
               Distance: ${planet["Distance [pc]"]} pc<br>
-              Radius: ${planet["Planet radius (earth radius)"]} R⊕<br>
-              Semi-major Axis: ${planet["Semi-major Axis (AU)"]} AU
+              Radius: ${planet["Planet radius (earth radius)"]} R⊕
             `;
-            tooltip.style.display = nameCell.classList.contains("clicked") ? "block" : "none";
-            positionTooltip(tooltip, nameCell);
+            tooltip.classList.add("show");
+            nameCell.appendChild(tooltip);
           });
 
           row.appendChild(nameCell);
@@ -103,26 +102,6 @@
         });
       });
 
-    // Position tooltip relative to element
-    function positionTooltip(tooltip, element) {
-      const rect = element.getBoundingClientRect();
-      const scrollY = window.scrollY || window.pageYOffset;
-      const scrollX = window.scrollX || window.pageXOffset;
-
-      let top = rect.bottom + scrollY + 5;
-      let left = rect.left + scrollX;
-
-      if(left + tooltip.offsetWidth > window.innerWidth - 10){
-        left = window.innerWidth - tooltip.offsetWidth - 10;
-      }
-      if(top + tooltip.offsetHeight > window.innerHeight + scrollY - 10){
-        top = rect.top + scrollY - tooltip.offsetHeight - 5;
-      }
-
-      tooltip.style.top = `${top}px`;
-      tooltip.style.left = `${left}px`;
-    }
-
     // Click outside to unpin tooltip
     document.addEventListener("click", e => {
       const clickedInside = e.target.closest("td");
@@ -130,7 +109,7 @@
         const clickedCell = document.querySelector("td.clicked");
         if (clickedCell) {
           clickedCell.classList.remove("clicked");
-          tooltip.style.display = "none";
+          tooltip.classList.remove("show");
         }
       }
     });
