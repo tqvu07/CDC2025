@@ -35,20 +35,62 @@
   </footer>
 
   <script>
+    async function fetchPlanetData(name) {
+      // Replace spaces with underscores for Wikipedia page URLs
+      const urlName = name.replace(/\s+/g, '_');
+      try {
+        const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${urlName}`);
+        const data = await response.json();
+        return data;
+      } catch {
+        return null;
+      }
+    }
+
     fetch("hz_planets.json")
       .then(response => response.json())
       .then(data => {
         const tbody = document.querySelector("#planet-table tbody");
         data.forEach(planet => {
           const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${planet["Planet Name"]}</td>
-            <td>${planet["Host name"]}</td>
-            <td>${planet["Distance [pc]"]}</td>
-            <td>${planet["Planet radius (earth radius)"]}</td>
-            <td>${planet["Insolation Flux [Earth Flux]"]}</td>
-          `;
+
+          // Planet name with tooltip container
+          const nameCell = document.createElement("td");
+          const nameSpan = document.createElement("span");
+          nameSpan.textContent = planet["Planet Name"];
+          nameSpan.classList.add("planet-name");
+          nameSpan.dataset.name = planet["Planet Name"];
+
+          const tooltip = document.createElement("div");
+          tooltip.classList.add("tooltip");
+
+          nameCell.appendChild(nameSpan);
+          nameCell.appendChild(tooltip);
+          row.appendChild(nameCell);
+
+          // Other columns
+          ["Host name","Distance [pc]","Planet radius (earth radius)","Insolation Flux [Earth Flux]"].forEach(col => {
+            const td = document.createElement("td");
+            td.textContent = planet[col];
+            row.appendChild(td);
+          });
+
           tbody.appendChild(row);
+
+          // Event listeners for hover
+          nameSpan.addEventListener("mouseenter", async () => {
+            tooltip.innerHTML = "Loading...";
+            const info = await fetchPlanetData(nameSpan.dataset.name);
+            if(info) {
+              tooltip.innerHTML = `
+                <strong>${info.title}</strong><br>
+                ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
+                <p>${info.extract}</p>
+              `;
+            } else {
+              tooltip.innerHTML = "<p>No information available</p>";
+            }
+          });
         });
       });
   </script>

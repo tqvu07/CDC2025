@@ -73,3 +73,20 @@ footer {
   font-size: 0.9em;
   color: #777;
 }
+
+/* Tooltip styling */
+.tooltip {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  max-width: 250px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+/* Show tooltip on hover */
+.planet-name:hover + .tooltip {
+  display: block;
+}
