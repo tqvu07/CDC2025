@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CDC Planet Habitability</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -35,220 +35,131 @@
   </footer>
 
   <script>
-  // Desktop-first version: Wikipedia hover + click pin + sorting
+    let openTooltip = null;
+    let openName = null;
+    let sortDirection = {};
 
-  let openTooltip = null;    // reference to tooltip element when pinned
-  let openNameEl = null;     // reference to selected name span when pinned
-  let sortState = {};        // track ascending/descending per column
-  let planetsData = [];      // loaded data
-
-  // create tooltip element appended to body
-  const tooltip = document.createElement('div');
-  tooltip.className = 'tooltip';
-  document.body.appendChild(tooltip);
-
-  // fetch wiki summary (REST v1) for a page name
-  async function fetchWikiSummary(name) {
-    const page = encodeURIComponent(name.replace(/\s+/g, '_'));
-    try {
-      const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${page}`);
-      if (!res.ok) return null;
-      const json = await res.json();
-      return json;
-    } catch {
-      return null;
-    }
-  }
-
-  // attach hover/click events for a planet name span
-  function attachTooltipEvents(nameSpan, planet) {
-    let wikiCache = null;
-
-    async function loadAndShow() {
-      tooltip.innerHTML = '<em>Loading…</em>';
-      positionTooltip(nameSpan);
-      tooltip.style.display = 'block';
-
-      if (!wikiCache) wikiCache = await fetchWikiSummary(nameSpan.dataset.name);
-      if (wikiCache && wikiCache.extract) {
-        tooltip.innerHTML = `
-          <strong>${escapeHtml(wikiCache.title || nameSpan.dataset.name)}</strong>
-          ${wikiCache.thumbnail ? `<div><img src="${escapeAttr(wikiCache.thumbnail.source)}" alt="${escapeAttr(wikiCache.title)}" /></div>` : ''}
-          <div class="tooltip-text">${escapeHtml(wikiCache.extract)}</div>
-        `;
-      } else {
-        // fallback: show some planet fields if wiki missing
-        tooltip.innerHTML = `
-          <strong>${escapeHtml(planet["Planet Name"] || nameSpan.dataset.name)}</strong>
-          <div class="tooltip-text">
-            Host: ${escapeHtml(planet["Host name"] || '')}<br>
-            Distance: ${escapeHtml(String(planet["Distance [pc]"] || ''))} pc<br>
-            Radius: ${escapeHtml(String(planet["Planet radius (earth radius)"] || ''))} R⊕<br>
-            Insolation: ${escapeHtml(String(planet["Insolation Flux [Earth Flux]"] || ''))}
-          </div>
-        `;
+    async function fetchPlanetData(name){
+      const urlName = name.replace(/\s+/g,'_');
+      try{
+        const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${urlName}`);
+        return await res.json();
+      } catch {
+        return null;
       }
     }
 
-    // Hover: only show if not pinned
-    nameSpan.addEventListener('mouseenter', async () => {
-      if (openNameEl !== nameSpan) {
-        await loadAndShow();
-      }
-    });
+    function attachTooltipEvents(nameSpan, tooltip){
+      nameSpan.addEventListener("mouseenter", async () => {
+        if(openTooltip !== tooltip){
+          const rect = nameSpan.getBoundingClientRect();
+          tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
+          tooltip.style.left = `${rect.left + window.scrollX}px`;
+          tooltip.style.display = "block";
+          tooltip.innerHTML = "Loading...";
+          const info = await fetchPlanetData(nameSpan.dataset.name);
+          tooltip.innerHTML = info ? `
+            <strong>${info.title}</strong><br>
+            ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
+            <div class="tooltip-text">${info.extract}</div>
+          ` : "<p>No information available</p>";
+        }
+      });
 
-    nameSpan.addEventListener('mouseleave', () => {
-      if (openNameEl !== nameSpan) {
-        tooltip.style.display = 'none';
-      }
-    });
+      nameSpan.addEventListener("mouseleave", () => {
+        if(openTooltip !== tooltip){
+          tooltip.style.display = "none";
+        }
+      });
 
-    // Click: pin/unpin
-    nameSpan.addEventListener('click', async (e) => {
-      e.stopPropagation();
-      // if another pinned, unpin it
-      if (openTooltip && openTooltip !== tooltip) {
-        // nothing extra needed, we only have one tooltip instance
-      }
-      if (openNameEl === nameSpan) {
-        // unpin
-        openNameEl.classList.remove('selected');
-        openNameEl = null;
-        openTooltip = null;
-        tooltip.style.display = 'none';
-      } else {
-        // pin this
-        if (openNameEl) openNameEl.classList.remove('selected');
-        openNameEl = nameSpan;
-        openNameEl.classList.add('selected');
+      nameSpan.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if(openTooltip && openTooltip !== tooltip){
+          tooltip.style.display = "none";
+          openName.classList.remove("selected");
+        }
+        const rect = nameSpan.getBoundingClientRect();
+        tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
+        tooltip.style.left = `${rect.left + window.scrollX}px`;
+        tooltip.style.display = "block";
+        nameSpan.classList.add("selected");
         openTooltip = tooltip;
-        await loadAndShow();
+        openName = nameSpan;
+        tooltip.innerHTML = "Loading...";
+        const info = await fetchPlanetData(nameSpan.dataset.name);
+        tooltip.innerHTML = info ? `
+          <strong>${info.title}</strong><br>
+          ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
+          <div class="tooltip-text">${info.extract}</div>
+        ` : "<p>No information available</p>";
+      });
+    }
+
+    document.addEventListener("click", () => {
+      if(openTooltip){
+        openTooltip.style.display = "none";
+        openName.classList.remove("selected");
+        openTooltip = null;
+        openName = null;
       }
     });
-  }
 
-  // position tooltip below element using getBoundingClientRect + scroll offsets
-  function positionTooltip(el) {
-    const rect = el.getBoundingClientRect();
-    const top = window.scrollY + rect.bottom + 6;
-    const left = window.scrollX + rect.left;
-    tooltip.style.top = `${top}px`;
-    tooltip.style.left = `${left}px`;
-  }
+    fetch("hz_planets.json")
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector("#planet-table tbody");
+        const tooltip = document.createElement("div");
+        tooltip.classList.add("tooltip");
+        document.body.appendChild(tooltip);
 
-  // utility: escape html/text for insertion
-  function escapeHtml(s) {
-    if (s === undefined || s === null) return '';
-    return String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-  }
-  function escapeAttr(s) {
-    if (s === undefined || s === null) return '';
-    return String(s).replace(/"/g, '&quot;');
-  }
+        function buildTable(data){
+          tbody.innerHTML = "";
+          data.forEach(planet => {
+            const row = document.createElement("tr");
 
-  // build/rebuild table rows from planetsData
-  function buildTable(data) {
-    const tbody = document.querySelector('#planet-table tbody');
-    tbody.innerHTML = '';
-    data.forEach(planet => {
-      const tr = document.createElement('tr');
+            const nameCell = document.createElement("td");
+            const nameSpan = document.createElement("span");
+            nameSpan.textContent = planet["Planet Name"];
+            nameSpan.classList.add("planet-name");
+            nameSpan.dataset.name = planet["Planet Name"];
+            nameCell.appendChild(nameSpan);
+            row.appendChild(nameCell);
 
-      const nameTd = document.createElement('td');
-      const nameSpan = document.createElement('span');
-      nameSpan.className = 'planet-name';
-      nameSpan.textContent = planet['Planet Name'] || 'Unknown';
-      nameSpan.dataset.name = planet['Planet Name'] || '';
-      nameTd.appendChild(nameSpan);
-      attachTooltipEvents(nameSpan, planet);
-      tr.appendChild(nameTd);
+            ["Host name","Distance [pc]","Planet radius (earth radius)","Insolation Flux [Earth Flux]"].forEach(col => {
+              const td = document.createElement("td");
+              td.textContent = planet[col];
+              row.appendChild(td);
+            });
 
-      const cols = [
-        'Host name',
-        'Distance [pc]',
-        'Planet radius (earth radius)',
-        'Insolation Flux [Earth Flux]'
-      ];
-      cols.forEach(k => {
-        const td = document.createElement('td');
-        td.textContent = (planet[k] !== undefined && planet[k] !== null) ? planet[k] : '';
-        tr.appendChild(td);
-      });
+            tbody.appendChild(row);
+            attachTooltipEvents(nameSpan, tooltip);
+          });
+        }
 
-      tbody.appendChild(tr);
-    });
-  }
+        buildTable(data);
 
-  // Sorting handler (click on header)
-  function enableSorting() {
-    document.querySelectorAll('#planet-table th.sortable, #planet-table th').forEach(th => {
-      // ensure sortable class exists for the ones with data-key
-      const key = th.dataset.key || th.getAttribute('data-column') || null;
-      if (!key) return; // no data key; skip
-      th.classList.add('sortable'); // ensure style
+        // Sorting functionality
+        document.querySelectorAll("th.sortable").forEach(th => {
+          th.addEventListener("click", () => {
+            const key = th.dataset.key;
+            const ascending = !sortDirection[key];
+            sortDirection[key] = ascending;
 
-      th.addEventListener('click', () => {
-        const ascending = !sortState[key];
-        sortState[key] = ascending;
+            data.sort((a,b) => {
+              const valA = a[key];
+              const valB = b[key];
+              if(!isNaN(valA) && !isNaN(valB)){
+                return ascending ? valA - valB : valB - valA;
+              } else {
+                return ascending ? String(valA).localeCompare(String(valB))
+                                 : String(valB).localeCompare(String(valA));
+              }
+            });
 
-        planetsData.sort((a, b) => {
-          const A = a[key];
-          const B = b[key];
-
-          // Attempt numeric compare
-          const nA = parseFloat(String(A).replace(/[^0-9eE\.\-+]/g, ''));
-          const nB = parseFloat(String(B).replace(/[^0-9eE\.\-+]/g, ''));
-          if (!Number.isNaN(nA) && !Number.isNaN(nB)) {
-            return ascending ? nA - nB : nB - nA;
-          }
-
-          const sA = String(A || '').toLowerCase();
-          const sB = String(B || '').toLowerCase();
-          if (sA < sB) return ascending ? -1 : 1;
-          if (sA > sB) return ascending ? 1 : -1;
-          return 0;
+            buildTable(data);
+          });
         });
-
-        // update header indicators
-        document.querySelectorAll('#planet-table th').forEach(h => {
-          h.classList.remove('asc','desc');
-        });
-        th.classList.add(ascending ? 'asc' : 'desc');
-
-        buildTable(planetsData);
       });
-    });
-  }
-
-  // load data then build
-  fetch('hz_planets.json')
-    .then(r => r.json())
-    .then(json => {
-      planetsData = Array.isArray(json) ? json : [];
-      buildTable(planetsData);
-      enableSorting();
-    })
-    .catch(err => {
-      console.error('failed to load hz_planets.json', err);
-    });
-
-  // clicking outside closes pinned tooltip
-  document.addEventListener('click', (e) => {
-    if (openNameEl && !e.target.closest('.planet-name')) {
-      openNameEl.classList.remove('selected');
-      openNameEl = null;
-      openTooltip = null;
-      tooltip.style.display = 'none';
-    }
-  });
-
-  // reposition tooltip for pinned element on scroll
-  window.addEventListener('scroll', () => {
-    if (openNameEl) positionTooltip(openNameEl);
-  });
-
   </script>
 </body>
 </html>

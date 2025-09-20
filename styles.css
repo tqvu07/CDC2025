@@ -1,79 +1,117 @@
-/* Basic reset */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* Reset defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f5f5f5;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
   color: #333;
+  line-height: 1.6;
   padding: 20px;
-  line-height: 1.5;
 }
 
-header { text-align: center; margin-bottom: 32px; }
-header h1 { font-size: 1.8rem; margin-bottom: 6px; }
-header p { color: #555; }
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
 
-main { max-width: 900px; margin: 0 auto; }
-section.info {
-  background: #fff;
-  padding: 18px;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.08);
+header h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.2em;
+  color: #555;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+section {
+  background-color: #fff;
+  padding: 20px;
   margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-h2 { color: #0077cc; margin-bottom: 10px; }
+
+h2 {
+  margin-bottom: 10px;
+  color: #0077cc;
+}
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 th, td {
-  padding: 8px 10px;
-  border: 1px solid #e0e0e0;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
   text-align: center;
 }
 
 th {
-  background: #0077cc;
+  background-color: #0077cc;
   color: white;
-  cursor: pointer;
 }
 
-th.asc::after { content: " ▲"; font-size: 0.8em; }
-th.desc::after { content: " ▼"; font-size: 0.8em; }
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
 
-tr:nth-child(even) { background: #fafafa; }
+th.sortable {
+  cursor: pointer;
+  text-decoration: underline;
+}
 
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9em;
+  color: #777;
+}
+
+/* Planet name styling */
 .planet-name {
-  display: inline-block;
-  color: #0077cc;
   cursor: pointer;
 }
 
 .planet-name.selected {
-  background: #0077cc;
-  color: #fff;
-  padding: 2px 6px;
+  background-color: #0077cc;
+  color: white;
+  padding: 2px 4px;
   border-radius: 4px;
 }
 
-/* tooltip appended to body, positioned absolutely via JS */
+/* Tooltip styling */
 .tooltip {
-  position: absolute;
   display: none;
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: 8px;
-  border-radius: 6px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
-  max-width: 320px;
-  font-size: 0.95rem;
-  z-index: 9999;
+  position: absolute; /* positioned relative to viewport */
+  background-color: #fff;
+  border: 1px solid #0077cc;
+  padding: 10px;
+  max-width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  z-index: 1000;
 }
 
-.tooltip img { max-width: 100%; height: auto; margin-top: 6px; }
-.tooltip .tooltip-text { max-height: 180px; overflow-y: auto; }
+.tooltip img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+}
 
-.tooltip.show { display: block; }
+.tooltip-text {
+  max-height: 200px;
+  overflow-y: auto;
+}
