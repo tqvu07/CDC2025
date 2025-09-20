@@ -43,7 +43,7 @@ section {
 
 h2 {
   margin-bottom: 10px;
-  color: #B69FD5;
+  color: #0077cc;
 }
 
 table {
@@ -59,8 +59,9 @@ th, td {
 }
 
 th {
-  background-color: #B69FD5;
+  background-color: #0077cc;
   color: white;
+  position: relative;
   user-select: none;
 }
 
@@ -70,13 +71,19 @@ tr:nth-child(even) {
 
 th.sortable {
   cursor: pointer;
-  position: relative;
+  text-decoration: underline;
 }
 
 .sort-icons {
-  font-size: 0.8em;
   margin-left: 5px;
-  color: #fff;
+  font-size: 0.8em;
+  color: white;
+}
+
+/* Active sort arrow */
+.sort-icons.active {
+  color: #B69FD5;
+  font-weight: bold;
 }
 
 footer {
@@ -92,7 +99,7 @@ footer {
 }
 
 .planet-name.selected {
-  background-color: #B69FD5;
+  background-color: #0077cc;
   color: white;
   padding: 2px 4px;
   border-radius: 4px;
@@ -101,12 +108,12 @@ footer {
 /* Tooltip styling */
 .tooltip {
   display: none;
-  position: absolute;
+  position: absolute; /* positioned relative to viewport */
   background-color: #fff;
-  border: 1px solid #B69FD5;
+  border: 1px solid #0077cc;
   padding: 10px;
   max-width: 250px;
-  max-height: 250px;
+  max-height: 300px;
   overflow-y: auto;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
   z-index: 1000;
