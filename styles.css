@@ -1,4 +1,4 @@
-/* Reset some default styles */
+/* Reset defaults */
 * {
   margin: 0;
   padding: 0;
@@ -29,7 +29,7 @@ header p {
 }
 
 main {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -44,6 +44,27 @@ section {
 h2 {
   margin-bottom: 10px;
   color: #0077cc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #0077cc;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
 footer {
