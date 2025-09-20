@@ -35,6 +35,10 @@
   </footer>
 
   <script>
+    const tooltip = document.createElement("div");
+    tooltip.className = "tooltip";
+    document.body.appendChild(tooltip);
+
     fetch("hz_planets.json")
       .then(response => response.json())
       .then(data => {
@@ -42,16 +46,73 @@
 
         data.forEach(planet => {
           const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${planet["Planet Name"]}</td>
+
+          const nameCell = document.createElement("td");
+          nameCell.textContent = planet["Planet Name"];
+          nameCell.style.cursor = "pointer";
+
+          // Hover tooltip
+          nameCell.addEventListener("mouseenter", () => {
+            if (!nameCell.classList.contains("clicked")) {
+              tooltip.innerHTML = `
+                <strong>${planet["Planet Name"]}</strong><br>
+                Host: ${planet["Host name"]}<br>
+                Distance: ${planet["Distance [pc]"]} pc<br>
+                Radius: ${planet["Planet radius (earth radius)"]} R⊕
+              `;
+              tooltip.classList.add("show");
+              nameCell.appendChild(tooltip);
+            }
+          });
+
+          nameCell.addEventListener("mouseleave", () => {
+            if (!nameCell.classList.contains("clicked")) {
+              tooltip.classList.remove("show");
+            }
+          });
+
+          // Click to pin tooltip
+          nameCell.addEventListener("click", () => {
+            const clicked = document.querySelector("td.clicked");
+            if (clicked && clicked !== nameCell) {
+              clicked.classList.remove("clicked");
+            }
+
+            nameCell.classList.toggle("clicked");
+            tooltip.innerHTML = `
+              <strong>${planet["Planet Name"]}</strong><br>
+              Host: ${planet["Host name"]}<br>
+              Distance: ${planet["Distance [pc]"]} pc<br>
+              Radius: ${planet["Planet radius (earth radius)"]} R⊕
+            `;
+            tooltip.classList.add("show");
+            nameCell.appendChild(tooltip);
+          });
+
+          row.appendChild(nameCell);
+          row.innerHTML += `
             <td>${planet["Host name"]}</td>
             <td>${planet["Distance [pc]"]}</td>
             <td>${planet["Planet radius (earth radius)"]}</td>
             <td>${planet["Insolation Flux [Earth Flux]"]}</td>
           `;
+
           tbody.appendChild(row);
         });
       });
+
+    // Click outside to close pinned tooltip
+    document.addEventListener("click", e => {
+      const insideCell = e.target.closest("td");
+      if (!insideCell) {
+        const clickedCell = document.querySelector("td.clicked");
+        if (clickedCell) {
+          clickedCell.classList.remove("clicked");
+          const tooltipEl = clickedCell.querySelector(".tooltip");
+          if (tooltipEl) tooltipEl.classList.remove("show");
+        }
+      }
+    });
   </script>
 </body>
 </html>
