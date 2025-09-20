@@ -74,19 +74,22 @@ footer {
   color: #777;
 }
 
-/* Wrapper around planet name for tooltip */
-.name-container {
-  position: relative;      /* tooltip positions relative to this container */
-  display: inline-block;   /* shrink to content width */
+/* Planet name styling */
+.planet-name {
+  cursor: pointer;
+}
+
+.planet-name.selected {
+  background-color: #0077cc;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 /* Tooltip styling */
 .tooltip {
   display: none;
-  position: absolute; /* relative to .name-container */
-  top: 100%;          /* directly below planet name */
-  left: 0;
-  margin-top: 5px;
+  position: absolute; /* positioned relative to viewport */
   background-color: #fff;
   border: 1px solid #0077cc;
   padding: 10px;
@@ -97,23 +100,12 @@ footer {
   z-index: 1000;
 }
 
-/* Highlight clicked planet */
-.planet-name.selected {
-  background-color: #0077cc;
-  color: white;
-  padding: 2px 4px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* Tooltip image responsive */
 .tooltip img {
   max-width: 100%;
   height: auto;
   margin-bottom: 5px;
 }
 
-/* Scrollable text inside tooltip */
 .tooltip-text {
   max-height: 200px;
   overflow-y: auto;
