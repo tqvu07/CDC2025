@@ -79,14 +79,33 @@ footer {
   display: none;
   position: absolute;
   background-color: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid #0077cc;
   padding: 10px;
-  max-width: 250px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  max-width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
   z-index: 100;
 }
 
-/* Show tooltip on hover */
-.planet-name:hover + .tooltip {
-  display: block;
+/* Highlight selected planet */
+.planet-name.selected {
+  background-color: #0077cc;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Tooltip image responsiveness */
+.tooltip img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+/* Scrollable text inside tooltip */
+.tooltip-text {
+  max-height: 200px;
+  overflow-y: auto;
 }

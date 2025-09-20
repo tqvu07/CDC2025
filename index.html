@@ -35,8 +35,10 @@
   </footer>
 
   <script>
+    let openTooltip = null;
+    let openName = null;
+
     async function fetchPlanetData(name) {
-      // Replace spaces with underscores for Wikipedia page URLs
       const urlName = name.replace(/\s+/g, '_');
       try {
         const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${urlName}`);
@@ -54,7 +56,7 @@
         data.forEach(planet => {
           const row = document.createElement("tr");
 
-          // Planet name with tooltip container
+          // Planet name cell
           const nameCell = document.createElement("td");
           const nameSpan = document.createElement("span");
           nameSpan.textContent = planet["Planet Name"];
@@ -77,18 +79,37 @@
 
           tbody.appendChild(row);
 
-          // Event listeners for hover
-          nameSpan.addEventListener("mouseenter", async () => {
-            tooltip.innerHTML = "Loading...";
-            const info = await fetchPlanetData(nameSpan.dataset.name);
-            if(info) {
-              tooltip.innerHTML = `
-                <strong>${info.title}</strong><br>
-                ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
-                <p>${info.extract}</p>
-              `;
+          // Click event for persistent tooltip
+          nameSpan.addEventListener("click", async () => {
+            // Close previous tooltip if open
+            if(openTooltip && openTooltip !== tooltip){
+              openTooltip.style.display = "none";
+              openName.classList.remove("selected");
+            }
+
+            // Toggle current tooltip
+            if(tooltip.style.display === "block"){
+              tooltip.style.display = "none";
+              nameSpan.classList.remove("selected");
+              openTooltip = null;
+              openName = null;
             } else {
-              tooltip.innerHTML = "<p>No information available</p>";
+              tooltip.innerHTML = "Loading...";
+              tooltip.style.display = "block";
+              nameSpan.classList.add("selected");
+              openTooltip = tooltip;
+              openName = nameSpan;
+
+              const info = await fetchPlanetData(nameSpan.dataset.name);
+              if(info){
+                tooltip.innerHTML = `
+                  <strong>${info.title}</strong><br>
+                  ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
+                  <div class="tooltip-text">${info.extract}</div>
+                `;
+              } else {
+                tooltip.innerHTML = "<p>No information available</p>";
+              }
             }
           });
         });
