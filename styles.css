@@ -74,7 +74,7 @@ footer {
   color: #777;
 }
 
-/* Make table cells relative so tooltip can position inside */
+/* Make table cells relative so tooltip positions inside the cell */
 td {
   position: relative;
 }
@@ -83,7 +83,7 @@ td {
 .tooltip {
   display: none;
   position: absolute; /* relative to td */
-  top: 100%;          /* directly below planet name */
+  top: 100%;          /* directly below the planet name */
   left: 0;
   margin-top: 5px;    /* spacing below name */
   background-color: #fff;
