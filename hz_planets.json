@@ -1,0 +1,1178 @@
+[
+  {
+    "Planet Name":"Gliese 12 b",
+    "Host name":"Gliese 12",
+    "Distance [pc]":12.21,
+    "Planet radius (earth radius)":0.9,
+    "Insolation Flux [Earth Flux]":1.6
+  },
+  {
+    "Planet Name":"Gliese 12 b",
+    "Host name":"Gliese 12",
+    "Distance [pc]":12.21,
+    "Planet radius (earth radius)":0.958,
+    "Insolation Flux [Earth Flux]":1.62
+  },
+  {
+    "Planet Name":"LHS 1140 b",
+    "Host name":"LHS 1140",
+    "Distance [pc]":14.9861,
+    "Planet radius (earth radius)":1.727,
+    "Insolation Flux [Earth Flux]":0.503
+  },
+  {
+    "Planet Name":"LHS 1140 b",
+    "Host name":"LHS 1140",
+    "Distance [pc]":14.9861,
+    "Planet radius (earth radius)":1.73,
+    "Insolation Flux [Earth Flux]":0.43
+  },
+  {
+    "Planet Name":"LHS 1140 b",
+    "Host name":"LHS 1140",
+    "Distance [pc]":14.9861,
+    "Planet radius (earth radius)":1.43,
+    "Insolation Flux [Earth Flux]":0.46
+  },
+  {
+    "Planet Name":"TOI-700 e",
+    "Host name":"TOI-700",
+    "Distance [pc]":31.1265,
+    "Planet radius (earth radius)":0.953,
+    "Insolation Flux [Earth Flux]":1.27
+  },
+  {
+    "Planet Name":"TOI-700 e",
+    "Host name":"TOI-700",
+    "Distance [pc]":31.1265,
+    "Planet radius (earth radius)":0.94918578,
+    "Insolation Flux [Earth Flux]":1.3108
+  },
+  {
+    "Planet Name":"TOI-700 d",
+    "Host name":"TOI-700",
+    "Distance [pc]":31.1265,
+    "Planet radius (earth radius)":1.32965711,
+    "Insolation Flux [Earth Flux]":0.8822
+  },
+  {
+    "Planet Name":"TOI-700 d",
+    "Host name":"TOI-700",
+    "Distance [pc]":31.1265,
+    "Planet radius (earth radius)":1.073,
+    "Insolation Flux [Earth Flux]":0.85
+  },
+  {
+    "Planet Name":"TOI-700 d",
+    "Host name":"TOI-700",
+    "Distance [pc]":31.1265,
+    "Planet radius (earth radius)":1.144,
+    "Insolation Flux [Earth Flux]":0.852
+  },
+  {
+    "Planet Name":"TOI-700 d",
+    "Host name":"TOI-700",
+    "Distance [pc]":31.1265,
+    "Planet radius (earth radius)":1.19,
+    "Insolation Flux [Earth Flux]":0.86
+  },
+  {
+    "Planet Name":"TOI-6002 b",
+    "Host name":"TOI-6002",
+    "Distance [pc]":32.0266,
+    "Planet radius (earth radius)":1.65,
+    "Insolation Flux [Earth Flux]":1.6823
+  },
+  {
+    "Planet Name":"LP 890-9 c",
+    "Host name":"LP 890-9",
+    "Distance [pc]":32.4298,
+    "Planet radius (earth radius)":1.367,
+    "Insolation Flux [Earth Flux]":0.906
+  },
+  {
+    "Planet Name":"TOI-715 b",
+    "Host name":"TOI-715",
+    "Distance [pc]":42.4048,
+    "Planet radius (earth radius)":1.55,
+    "Insolation Flux [Earth Flux]":0.67
+  },
+  {
+    "Planet Name":"TOI-715 b",
+    "Host name":"TOI-715",
+    "Distance [pc]":42.4048,
+    "Planet radius (earth radius)":1.71453082,
+    "Insolation Flux [Earth Flux]":0.7213
+  },
+  {
+    "Planet Name":"TOI-2285 b",
+    "Host name":"TOI-2285",
+    "Distance [pc]":42.409,
+    "Planet radius (earth radius)":1.74,
+    "Insolation Flux [Earth Flux]":1.54
+  },
+  {
+    "Planet Name":"TOI-2285 b",
+    "Host name":"TOI-2285",
+    "Distance [pc]":42.409,
+    "Planet radius (earth radius)":1.57811359,
+    "Insolation Flux [Earth Flux]":1.6051
+  },
+  {
+    "Planet Name":"K2-3 d",
+    "Host name":"K2-3",
+    "Distance [pc]":44.0727,
+    "Planet radius (earth radius)":1.61,
+    "Insolation Flux [Earth Flux]":1.5
+  },
+  {
+    "Planet Name":"K2-3 d",
+    "Host name":"K2-3",
+    "Distance [pc]":44.0727,
+    "Planet radius (earth radius)":1.458,
+    "Insolation Flux [Earth Flux]":1.44
+  },
+  {
+    "Planet Name":"K2-3 d",
+    "Host name":"K2-3",
+    "Distance [pc]":44.0727,
+    "Planet radius (earth radius)":1.52,
+    "Insolation Flux [Earth Flux]":1.51
+  },
+  {
+    "Planet Name":"K2-3 d",
+    "Host name":"K2-3",
+    "Distance [pc]":44.0727,
+    "Planet radius (earth radius)":1.62,
+    "Insolation Flux [Earth Flux]":1.6
+  },
+  {
+    "Planet Name":"K2-3 d",
+    "Host name":"K2-3",
+    "Distance [pc]":44.0727,
+    "Planet radius (earth radius)":1.51,
+    "Insolation Flux [Earth Flux]":1.5
+  },
+  {
+    "Planet Name":"K2-3 d",
+    "Host name":"K2-3",
+    "Distance [pc]":44.0727,
+    "Planet radius (earth radius)":0.96,
+    "Insolation Flux [Earth Flux]":0.8
+  },
+  {
+    "Planet Name":"K2-72 c",
+    "Host name":"K2-72",
+    "Distance [pc]":66.4321,
+    "Planet radius (earth radius)":0.86,
+    "Insolation Flux [Earth Flux]":1.41
+  },
+  {
+    "Planet Name":"K2-72 e",
+    "Host name":"K2-72",
+    "Distance [pc]":66.4321,
+    "Planet radius (earth radius)":1.29,
+    "Insolation Flux [Earth Flux]":1.2
+  },
+  {
+    "Planet Name":"K2-72 e",
+    "Host name":"K2-72",
+    "Distance [pc]":66.4321,
+    "Planet radius (earth radius)":0.82,
+    "Insolation Flux [Earth Flux]":0.76
+  },
+  {
+    "Planet Name":"K2-155 d",
+    "Host name":"K2-155",
+    "Distance [pc]":72.7998,
+    "Planet radius (earth radius)":1.64,
+    "Insolation Flux [Earth Flux]":1.67
+  },
+  {
+    "Planet Name":"Kepler-1649 b",
+    "Host name":"Kepler-1649",
+    "Distance [pc]":92.1913,
+    "Planet radius (earth radius)":0.57,
+    "Insolation Flux [Earth Flux]":0.47
+  },
+  {
+    "Planet Name":"Kepler-1649 b",
+    "Host name":"Kepler-1649",
+    "Distance [pc]":92.1913,
+    "Planet radius (earth radius)":0.57,
+    "Insolation Flux [Earth Flux]":0.47
+  },
+  {
+    "Planet Name":"Kepler-1649 b",
+    "Host name":"Kepler-1649",
+    "Distance [pc]":92.1913,
+    "Planet radius (earth radius)":0.57,
+    "Insolation Flux [Earth Flux]":0.47
+  },
+  {
+    "Planet Name":"Kepler-1649 b",
+    "Host name":"Kepler-1649",
+    "Distance [pc]":92.1913,
+    "Planet radius (earth radius)":0.49,
+    "Insolation Flux [Earth Flux]":0.47
+  },
+  {
+    "Planet Name":"Kepler-1649 c",
+    "Host name":"Kepler-1649",
+    "Distance [pc]":92.1913,
+    "Planet radius (earth radius)":1.06,
+    "Insolation Flux [Earth Flux]":0.75
+  },
+  {
+    "Planet Name":"Kepler-560 b",
+    "Host name":"Kepler-560",
+    "Distance [pc]":109.308,
+    "Planet radius (earth radius)":1.57,
+    "Insolation Flux [Earth Flux]":1.26
+  },
+  {
+    "Planet Name":"Kepler-560 b",
+    "Host name":"Kepler-560",
+    "Distance [pc]":109.308,
+    "Planet radius (earth radius)":1.47,
+    "Insolation Flux [Earth Flux]":1.18
+  },
+  {
+    "Planet Name":"Kepler-560 b",
+    "Host name":"Kepler-560",
+    "Distance [pc]":109.308,
+    "Planet radius (earth radius)":1.57,
+    "Insolation Flux [Earth Flux]":1.26
+  },
+  {
+    "Planet Name":"Kepler-560 b",
+    "Host name":"Kepler-560",
+    "Distance [pc]":109.308,
+    "Planet radius (earth radius)":1.55,
+    "Insolation Flux [Earth Flux]":1.21
+  },
+  {
+    "Planet Name":"Kepler-560 b",
+    "Host name":"Kepler-560",
+    "Distance [pc]":109.308,
+    "Planet radius (earth radius)":1.57,
+    "Insolation Flux [Earth Flux]":1.26
+  },
+  {
+    "Planet Name":"Kepler-1229 b",
+    "Host name":"Kepler-1229",
+    "Distance [pc]":265.482,
+    "Planet radius (earth radius)":1.68,
+    "Insolation Flux [Earth Flux]":0.35
+  },
+  {
+    "Planet Name":"Kepler-1229 b",
+    "Host name":"Kepler-1229",
+    "Distance [pc]":265.482,
+    "Planet radius (earth radius)":1.12,
+    "Insolation Flux [Earth Flux]":0.35
+  },
+  {
+    "Planet Name":"Kepler-1229 b",
+    "Host name":"Kepler-1229",
+    "Distance [pc]":265.482,
+    "Planet radius (earth radius)":1.12,
+    "Insolation Flux [Earth Flux]":0.35
+  },
+  {
+    "Planet Name":"Kepler-1229 b",
+    "Host name":"Kepler-1229",
+    "Distance [pc]":265.482,
+    "Planet radius (earth radius)":1.12,
+    "Insolation Flux [Earth Flux]":0.35
+  },
+  {
+    "Planet Name":"Kepler-54 d",
+    "Host name":"Kepler-54",
+    "Distance [pc]":271.701,
+    "Planet radius (earth radius)":1.14,
+    "Insolation Flux [Earth Flux]":1.47
+  },
+  {
+    "Planet Name":"Kepler-705 b",
+    "Host name":"Kepler-705",
+    "Distance [pc]":276.881,
+    "Planet radius (earth radius)":1.96,
+    "Insolation Flux [Earth Flux]":0.64
+  },
+  {
+    "Planet Name":"Kepler-705 b",
+    "Host name":"Kepler-705",
+    "Distance [pc]":276.881,
+    "Planet radius (earth radius)":1.96,
+    "Insolation Flux [Earth Flux]":0.64
+  },
+  {
+    "Planet Name":"Kepler-705 b",
+    "Host name":"Kepler-705",
+    "Distance [pc]":276.881,
+    "Planet radius (earth radius)":1.94,
+    "Insolation Flux [Earth Flux]":0.69
+  },
+  {
+    "Planet Name":"Kepler-705 b",
+    "Host name":"Kepler-705",
+    "Distance [pc]":276.881,
+    "Planet radius (earth radius)":1.96,
+    "Insolation Flux [Earth Flux]":0.64
+  },
+  {
+    "Planet Name":"Kepler-155 c",
+    "Host name":"Kepler-155",
+    "Distance [pc]":293.499,
+    "Planet radius (earth radius)":1.97,
+    "Insolation Flux [Earth Flux]":1.03
+  },
+  {
+    "Planet Name":"Kepler-155 c",
+    "Host name":"Kepler-155",
+    "Distance [pc]":293.499,
+    "Planet radius (earth radius)":1.8,
+    "Insolation Flux [Earth Flux]":1.28
+  },
+  {
+    "Planet Name":"Kepler-155 c",
+    "Host name":"Kepler-155",
+    "Distance [pc]":293.499,
+    "Planet radius (earth radius)":1.76,
+    "Insolation Flux [Earth Flux]":1.28
+  },
+  {
+    "Planet Name":"Kepler-155 c",
+    "Host name":"Kepler-155",
+    "Distance [pc]":293.499,
+    "Planet radius (earth radius)":1.87,
+    "Insolation Flux [Earth Flux]":1.28
+  },
+  {
+    "Planet Name":"Kepler-155 c",
+    "Host name":"Kepler-155",
+    "Distance [pc]":293.499,
+    "Planet radius (earth radius)":1.76,
+    "Insolation Flux [Earth Flux]":1.28
+  },
+  {
+    "Planet Name":"Kepler-155 c",
+    "Host name":"Kepler-155",
+    "Distance [pc]":293.499,
+    "Planet radius (earth radius)":1.76,
+    "Insolation Flux [Earth Flux]":1.28
+  },
+  {
+    "Planet Name":"Kepler-62 e",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.843,
+    "Insolation Flux [Earth Flux]":1.352
+  },
+  {
+    "Planet Name":"Kepler-62 e",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.67,
+    "Insolation Flux [Earth Flux]":1.321
+  },
+  {
+    "Planet Name":"Kepler-62 e",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.73,
+    "Insolation Flux [Earth Flux]":1.17
+  },
+  {
+    "Planet Name":"Kepler-62 f",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.42,
+    "Insolation Flux [Earth Flux]":0.41
+  },
+  {
+    "Planet Name":"Kepler-62 e",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.72,
+    "Insolation Flux [Earth Flux]":1.24
+  },
+  {
+    "Planet Name":"Kepler-62 e",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.73,
+    "Insolation Flux [Earth Flux]":1.17
+  },
+  {
+    "Planet Name":"Kepler-62 e",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.873,
+    "Insolation Flux [Earth Flux]":1.4
+  },
+  {
+    "Planet Name":"Kepler-62 f",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.461,
+    "Insolation Flux [Earth Flux]":0.466
+  },
+  {
+    "Planet Name":"Kepler-62 f",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.42,
+    "Insolation Flux [Earth Flux]":0.41
+  },
+  {
+    "Planet Name":"Kepler-62 f",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.531,
+    "Insolation Flux [Earth Flux]":0.477
+  },
+  {
+    "Planet Name":"Kepler-62 f",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.42,
+    "Insolation Flux [Earth Flux]":0.41
+  },
+  {
+    "Planet Name":"Kepler-62 f",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.54,
+    "Insolation Flux [Earth Flux]":0.5
+  },
+  {
+    "Planet Name":"Kepler-62 f",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.43,
+    "Insolation Flux [Earth Flux]":0.44
+  },
+  {
+    "Planet Name":"Kepler-62 e",
+    "Host name":"Kepler-62",
+    "Distance [pc]":300.874,
+    "Planet radius (earth radius)":1.73,
+    "Insolation Flux [Earth Flux]":1.17
+  },
+  {
+    "Planet Name":"Kepler-440 b",
+    "Host name":"Kepler-440",
+    "Distance [pc]":301.03,
+    "Planet radius (earth radius)":1.47,
+    "Insolation Flux [Earth Flux]":0.39
+  },
+  {
+    "Planet Name":"Kepler-440 b",
+    "Host name":"Kepler-440",
+    "Distance [pc]":301.03,
+    "Planet radius (earth radius)":1.47,
+    "Insolation Flux [Earth Flux]":0.39
+  },
+  {
+    "Planet Name":"Kepler-440 b",
+    "Host name":"Kepler-440",
+    "Distance [pc]":301.03,
+    "Planet radius (earth radius)":1.47,
+    "Insolation Flux [Earth Flux]":0.39
+  },
+  {
+    "Planet Name":"Kepler-440 b",
+    "Host name":"Kepler-440",
+    "Distance [pc]":301.03,
+    "Planet radius (earth radius)":1.86,
+    "Insolation Flux [Earth Flux]":1.2
+  },
+  {
+    "Planet Name":"Kepler-440 b",
+    "Host name":"Kepler-440",
+    "Distance [pc]":301.03,
+    "Planet radius (earth radius)":1.899,
+    "Insolation Flux [Earth Flux]":0.91
+  },
+  {
+    "Planet Name":"Kepler-440 b",
+    "Host name":"Kepler-440",
+    "Distance [pc]":301.03,
+    "Planet radius (earth radius)":1.61,
+    "Insolation Flux [Earth Flux]":0.65
+  },
+  {
+    "Planet Name":"Kepler-1544 b",
+    "Host name":"Kepler-1544",
+    "Distance [pc]":335.09,
+    "Planet radius (earth radius)":1.83,
+    "Insolation Flux [Earth Flux]":1.02
+  },
+  {
+    "Planet Name":"Kepler-1544 b",
+    "Host name":"Kepler-1544",
+    "Distance [pc]":335.09,
+    "Planet radius (earth radius)":1.79,
+    "Insolation Flux [Earth Flux]":0.82
+  },
+  {
+    "Planet Name":"Kepler-1544 b",
+    "Host name":"Kepler-1544",
+    "Distance [pc]":335.09,
+    "Planet radius (earth radius)":1.69,
+    "Insolation Flux [Earth Flux]":0.8
+  },
+  {
+    "Planet Name":"Kepler-1544 b",
+    "Host name":"Kepler-1544",
+    "Distance [pc]":335.09,
+    "Planet radius (earth radius)":1.685,
+    "Insolation Flux [Earth Flux]":0.833
+  },
+  {
+    "Planet Name":"Kepler-1544 b",
+    "Host name":"Kepler-1544",
+    "Distance [pc]":335.09,
+    "Planet radius (earth radius)":1.83,
+    "Insolation Flux [Earth Flux]":1.02
+  },
+  {
+    "Planet Name":"Kepler-1544 b",
+    "Host name":"Kepler-1544",
+    "Distance [pc]":335.09,
+    "Planet radius (earth radius)":1.682,
+    "Insolation Flux [Earth Flux]":0.8
+  },
+  {
+    "Planet Name":"Kepler-1544 b",
+    "Host name":"Kepler-1544",
+    "Distance [pc]":335.09,
+    "Planet radius (earth radius)":1.83,
+    "Insolation Flux [Earth Flux]":1.02
+  },
+  {
+    "Planet Name":"Kepler-26 e",
+    "Host name":"Kepler-26",
+    "Distance [pc]":335.307,
+    "Planet radius (earth radius)":1.92,
+    "Insolation Flux [Earth Flux]":1.02
+  },
+  {
+    "Planet Name":"Kepler-1455 b",
+    "Host name":"Kepler-1455",
+    "Distance [pc]":357.621,
+    "Planet radius (earth radius)":1.97,
+    "Insolation Flux [Earth Flux]":1.3
+  },
+  {
+    "Planet Name":"Kepler-1455 b",
+    "Host name":"Kepler-1455",
+    "Distance [pc]":357.621,
+    "Planet radius (earth radius)":1.97,
+    "Insolation Flux [Earth Flux]":1.3
+  },
+  {
+    "Planet Name":"Kepler-1455 b",
+    "Host name":"Kepler-1455",
+    "Distance [pc]":357.621,
+    "Planet radius (earth radius)":1.97,
+    "Insolation Flux [Earth Flux]":1.3
+  },
+  {
+    "Planet Name":"Kepler-1455 b",
+    "Host name":"Kepler-1455",
+    "Distance [pc]":357.621,
+    "Planet radius (earth radius)":1.909,
+    "Insolation Flux [Earth Flux]":1.533
+  },
+  {
+    "Planet Name":"Kepler-1455 b",
+    "Host name":"Kepler-1455",
+    "Distance [pc]":357.621,
+    "Planet radius (earth radius)":1.93,
+    "Insolation Flux [Earth Flux]":1.16
+  },
+  {
+    "Planet Name":"Kepler-1455 b",
+    "Host name":"Kepler-1455",
+    "Distance [pc]":357.621,
+    "Planet radius (earth radius)":1.75,
+    "Insolation Flux [Earth Flux]":1.28
+  },
+  {
+    "Planet Name":"Kepler-442 b",
+    "Host name":"Kepler-442",
+    "Distance [pc]":365.965,
+    "Planet radius (earth radius)":1.56,
+    "Insolation Flux [Earth Flux]":1.08
+  },
+  {
+    "Planet Name":"Kepler-442 b",
+    "Host name":"Kepler-442",
+    "Distance [pc]":365.965,
+    "Planet radius (earth radius)":1.3,
+    "Insolation Flux [Earth Flux]":0.79
+  },
+  {
+    "Planet Name":"Kepler-442 b",
+    "Host name":"Kepler-442",
+    "Distance [pc]":365.965,
+    "Planet radius (earth radius)":1.395,
+    "Insolation Flux [Earth Flux]":0.911
+  },
+  {
+    "Planet Name":"Kepler-442 b",
+    "Host name":"Kepler-442",
+    "Distance [pc]":365.965,
+    "Planet radius (earth radius)":1.56,
+    "Insolation Flux [Earth Flux]":1.08
+  },
+  {
+    "Planet Name":"Kepler-442 b",
+    "Host name":"Kepler-442",
+    "Distance [pc]":365.965,
+    "Planet radius (earth radius)":1.34,
+    "Insolation Flux [Earth Flux]":0.66
+  },
+  {
+    "Planet Name":"Kepler-442 b",
+    "Host name":"Kepler-442",
+    "Distance [pc]":365.965,
+    "Planet radius (earth radius)":1.56,
+    "Insolation Flux [Earth Flux]":1.08
+  },
+  {
+    "Planet Name":"Kepler-395 c",
+    "Host name":"Kepler-395",
+    "Distance [pc]":421.382,
+    "Planet radius (earth radius)":1.25,
+    "Insolation Flux [Earth Flux]":1.14
+  },
+  {
+    "Planet Name":"Kepler-395 c",
+    "Host name":"Kepler-395",
+    "Distance [pc]":421.382,
+    "Planet radius (earth radius)":1.25,
+    "Insolation Flux [Earth Flux]":1.14
+  },
+  {
+    "Planet Name":"Kepler-395 c",
+    "Host name":"Kepler-395",
+    "Distance [pc]":421.382,
+    "Planet radius (earth radius)":1.25,
+    "Insolation Flux [Earth Flux]":1.14
+  },
+  {
+    "Planet Name":"Kepler-395 c",
+    "Host name":"Kepler-395",
+    "Distance [pc]":421.382,
+    "Planet radius (earth radius)":0.96,
+    "Insolation Flux [Earth Flux]":1.17
+  },
+  {
+    "Planet Name":"Kepler-395 c",
+    "Host name":"Kepler-395",
+    "Distance [pc]":421.382,
+    "Planet radius (earth radius)":1.18,
+    "Insolation Flux [Earth Flux]":1.15
+  },
+  {
+    "Planet Name":"Kepler-235 e",
+    "Host name":"Kepler-235",
+    "Distance [pc]":428.018,
+    "Planet radius (earth radius)":1.9,
+    "Insolation Flux [Earth Flux]":1.16
+  },
+  {
+    "Planet Name":"Kepler-235 e",
+    "Host name":"Kepler-235",
+    "Distance [pc]":428.018,
+    "Planet radius (earth radius)":1.94,
+    "Insolation Flux [Earth Flux]":1.16
+  },
+  {
+    "Planet Name":"Kepler-235 e",
+    "Host name":"Kepler-235",
+    "Distance [pc]":428.018,
+    "Planet radius (earth radius)":1.94,
+    "Insolation Flux [Earth Flux]":1.16
+  },
+  {
+    "Planet Name":"Kepler-235 e",
+    "Host name":"Kepler-235",
+    "Distance [pc]":428.018,
+    "Planet radius (earth radius)":1.83,
+    "Insolation Flux [Earth Flux]":1.32
+  },
+  {
+    "Planet Name":"Kepler-235 e",
+    "Host name":"Kepler-235",
+    "Distance [pc]":428.018,
+    "Planet radius (earth radius)":1.94,
+    "Insolation Flux [Earth Flux]":1.16
+  },
+  {
+    "Planet Name":"Kepler-283 c",
+    "Host name":"Kepler-283",
+    "Distance [pc]":468.094,
+    "Planet radius (earth radius)":1.87,
+    "Insolation Flux [Earth Flux]":0.78
+  },
+  {
+    "Planet Name":"Kepler-309 c",
+    "Host name":"Kepler-309",
+    "Distance [pc]":544.568,
+    "Planet radius (earth radius)":1.87,
+    "Insolation Flux [Earth Flux]":0.41
+  },
+  {
+    "Planet Name":"Kepler-309 c",
+    "Host name":"Kepler-309",
+    "Distance [pc]":544.568,
+    "Planet radius (earth radius)":1.9,
+    "Insolation Flux [Earth Flux]":0.4
+  },
+  {
+    "Planet Name":"Kepler-452 b",
+    "Host name":"Kepler-452",
+    "Distance [pc]":551.727,
+    "Planet radius (earth radius)":1.511,
+    "Insolation Flux [Earth Flux]":1.089
+  },
+  {
+    "Planet Name":"Kepler-452 b",
+    "Host name":"Kepler-452",
+    "Distance [pc]":551.727,
+    "Planet radius (earth radius)":1.63,
+    "Insolation Flux [Earth Flux]":1.1
+  },
+  {
+    "Planet Name":"Kepler-452 b",
+    "Host name":"Kepler-452",
+    "Distance [pc]":551.727,
+    "Planet radius (earth radius)":1.13,
+    "Insolation Flux [Earth Flux]":0.56
+  },
+  {
+    "Planet Name":"Kepler-452 b",
+    "Host name":"Kepler-452",
+    "Distance [pc]":551.727,
+    "Planet radius (earth radius)":1.09,
+    "Insolation Flux [Earth Flux]":0.56
+  },
+  {
+    "Planet Name":"Kepler-1701 b",
+    "Host name":"Kepler-1701",
+    "Distance [pc]":584.142,
+    "Planet radius (earth radius)":1.99,
+    "Insolation Flux [Earth Flux]":1.41
+  },
+  {
+    "Planet Name":"Kepler-1701 b",
+    "Host name":"Kepler-1701",
+    "Distance [pc]":584.142,
+    "Planet radius (earth radius)":1.99,
+    "Insolation Flux [Earth Flux]":1.41
+  },
+  {
+    "Planet Name":"Kepler-1701 b",
+    "Host name":"Kepler-1701",
+    "Distance [pc]":584.142,
+    "Planet radius (earth radius)":1.99,
+    "Insolation Flux [Earth Flux]":1.41
+  },
+  {
+    "Planet Name":"Kepler-436 b",
+    "Host name":"Kepler-436",
+    "Distance [pc]":588.867,
+    "Planet radius (earth radius)":1.9,
+    "Insolation Flux [Earth Flux]":1.28
+  },
+  {
+    "Planet Name":"Kepler-436 b",
+    "Host name":"Kepler-436",
+    "Distance [pc]":588.867,
+    "Planet radius (earth radius)":1.9,
+    "Insolation Flux [Earth Flux]":1.28
+  },
+  {
+    "Planet Name":"Kepler-436 b",
+    "Host name":"Kepler-436",
+    "Distance [pc]":588.867,
+    "Planet radius (earth radius)":1.9,
+    "Insolation Flux [Earth Flux]":1.28
+  },
+  {
+    "Planet Name":"Kepler-1632 b",
+    "Host name":"Kepler-1632",
+    "Distance [pc]":716.76,
+    "Planet radius (earth radius)":1.66,
+    "Insolation Flux [Earth Flux]":0.68
+  },
+  {
+    "Planet Name":"Kepler-1632 b",
+    "Host name":"Kepler-1632",
+    "Distance [pc]":716.76,
+    "Planet radius (earth radius)":1.66,
+    "Insolation Flux [Earth Flux]":0.68
+  },
+  {
+    "Planet Name":"Kepler-69 c",
+    "Host name":"Kepler-69",
+    "Distance [pc]":730.625,
+    "Planet radius (earth radius)":1.73,
+    "Insolation Flux [Earth Flux]":1.59
+  },
+  {
+    "Planet Name":"Kepler-69 c",
+    "Host name":"Kepler-69",
+    "Distance [pc]":730.625,
+    "Planet radius (earth radius)":1.74,
+    "Insolation Flux [Earth Flux]":1.59
+  },
+  {
+    "Planet Name":"Kepler-69 c",
+    "Host name":"Kepler-69",
+    "Distance [pc]":730.625,
+    "Planet radius (earth radius)":1.74,
+    "Insolation Flux [Earth Flux]":1.59
+  },
+  {
+    "Planet Name":"Kepler-69 c",
+    "Host name":"Kepler-69",
+    "Distance [pc]":730.625,
+    "Planet radius (earth radius)":1.74,
+    "Insolation Flux [Earth Flux]":1.59
+  },
+  {
+    "Planet Name":"Kepler-69 c",
+    "Host name":"Kepler-69",
+    "Distance [pc]":730.625,
+    "Planet radius (earth radius)":1.79,
+    "Insolation Flux [Earth Flux]":1.64
+  },
+  {
+    "Planet Name":"Kepler-1606 b",
+    "Host name":"Kepler-1606",
+    "Distance [pc]":831.287,
+    "Planet radius (earth radius)":1.98,
+    "Insolation Flux [Earth Flux]":1.38
+  },
+  {
+    "Planet Name":"Kepler-1606 b",
+    "Host name":"Kepler-1606",
+    "Distance [pc]":831.287,
+    "Planet radius (earth radius)":1.98,
+    "Insolation Flux [Earth Flux]":1.38
+  },
+  {
+    "Planet Name":"Kepler-1606 b",
+    "Host name":"Kepler-1606",
+    "Distance [pc]":831.287,
+    "Planet radius (earth radius)":1.98,
+    "Insolation Flux [Earth Flux]":1.38
+  },
+  {
+    "Planet Name":"Kepler-1638 b",
+    "Host name":"Kepler-1638",
+    "Distance [pc]":1525.52,
+    "Planet radius (earth radius)":1.7,
+    "Insolation Flux [Earth Flux]":1.47
+  },
+  {
+    "Planet Name":"Kepler-1638 b",
+    "Host name":"Kepler-1638",
+    "Distance [pc]":1525.52,
+    "Planet radius (earth radius)":1.6,
+    "Insolation Flux [Earth Flux]":1.17
+  },
+  {
+    "Planet Name":"Kepler-1638 b",
+    "Host name":"Kepler-1638",
+    "Distance [pc]":1525.52,
+    "Planet radius (earth radius)":1.7,
+    "Insolation Flux [Earth Flux]":1.47
+  },
+  {
+    "Planet Name":"Kepler-1410 b",
+    "Host name":"Kepler-1410",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.56,
+    "Insolation Flux [Earth Flux]":0.93
+  },
+  {
+    "Planet Name":"Kepler-1410 b",
+    "Host name":"Kepler-1410",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.56,
+    "Insolation Flux [Earth Flux]":0.93
+  },
+  {
+    "Planet Name":"Kepler-1410 b",
+    "Host name":"Kepler-1410",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.56,
+    "Insolation Flux [Earth Flux]":0.93
+  },
+  {
+    "Planet Name":"Kepler-1410 b",
+    "Host name":"Kepler-1410",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.39,
+    "Insolation Flux [Earth Flux]":0.84
+  },
+  {
+    "Planet Name":"Kepler-1512 b",
+    "Host name":"Kepler-1512",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":0.8,
+    "Insolation Flux [Earth Flux]":1.38
+  },
+  {
+    "Planet Name":"Kepler-1512 b",
+    "Host name":"Kepler-1512",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":0.8,
+    "Insolation Flux [Earth Flux]":1.6
+  },
+  {
+    "Planet Name":"Kepler-1652 b",
+    "Host name":"Kepler-1652",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.58,
+    "Insolation Flux [Earth Flux]":0.81
+  },
+  {
+    "Planet Name":"Kepler-1652 b",
+    "Host name":"Kepler-1652",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.12,
+    "Insolation Flux [Earth Flux]":0.65
+  },
+  {
+    "Planet Name":"Kepler-1652 b",
+    "Host name":"Kepler-1652",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.6,
+    "Insolation Flux [Earth Flux]":0.81
+  },
+  {
+    "Planet Name":"Kepler-1652 b",
+    "Host name":"Kepler-1652",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.12,
+    "Insolation Flux [Earth Flux]":0.65
+  },
+  {
+    "Planet Name":"Kepler-1652 b",
+    "Host name":"Kepler-1652",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.12,
+    "Insolation Flux [Earth Flux]":0.65
+  },
+  {
+    "Planet Name":"Kepler-1653 b",
+    "Host name":"Kepler-1653",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.84,
+    "Insolation Flux [Earth Flux]":1.28
+  },
+  {
+    "Planet Name":"Kepler-1653 b",
+    "Host name":"Kepler-1653",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.73,
+    "Insolation Flux [Earth Flux]":1.04
+  },
+  {
+    "Planet Name":"Kepler-1653 b",
+    "Host name":"Kepler-1653",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.73,
+    "Insolation Flux [Earth Flux]":1.04
+  },
+  {
+    "Planet Name":"Kepler-1653 b",
+    "Host name":"Kepler-1653",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.73,
+    "Insolation Flux [Earth Flux]":1.04
+  },
+  {
+    "Planet Name":"Kepler-296 d",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":0.92,
+    "Insolation Flux [Earth Flux]":0.82
+  },
+  {
+    "Planet Name":"Kepler-296 e",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.08,
+    "Insolation Flux [Earth Flux]":0.84
+  },
+  {
+    "Planet Name":"Kepler-296 e",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.53,
+    "Insolation Flux [Earth Flux]":1.41
+  },
+  {
+    "Planet Name":"Kepler-296 e",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.08,
+    "Insolation Flux [Earth Flux]":0.84
+  },
+  {
+    "Planet Name":"Kepler-296 e",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.08,
+    "Insolation Flux [Earth Flux]":0.84
+  },
+  {
+    "Planet Name":"Kepler-296 e",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.48,
+    "Insolation Flux [Earth Flux]":1.45
+  },
+  {
+    "Planet Name":"Kepler-296 e",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.06,
+    "Insolation Flux [Earth Flux]":0.89
+  },
+  {
+    "Planet Name":"Kepler-296 f",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.23,
+    "Insolation Flux [Earth Flux]":0.37
+  },
+  {
+    "Planet Name":"Kepler-296 f",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.23,
+    "Insolation Flux [Earth Flux]":0.37
+  },
+  {
+    "Planet Name":"Kepler-296 f",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.23,
+    "Insolation Flux [Earth Flux]":0.37
+  },
+  {
+    "Planet Name":"Kepler-296 f",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.75,
+    "Insolation Flux [Earth Flux]":0.39
+  },
+  {
+    "Planet Name":"Kepler-296 f",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.8,
+    "Insolation Flux [Earth Flux]":0.62
+  },
+  {
+    "Planet Name":"Kepler-296 f",
+    "Host name":"Kepler-296",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.18,
+    "Insolation Flux [Earth Flux]":0.39
+  },
+  {
+    "Planet Name":"Kepler-438 b",
+    "Host name":"Kepler-438",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":0.97,
+    "Insolation Flux [Earth Flux]":1.62
+  },
+  {
+    "Planet Name":"Kepler-438 b",
+    "Host name":"Kepler-438",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.01,
+    "Insolation Flux [Earth Flux]":1.31
+  },
+  {
+    "Planet Name":"Kepler-438 b",
+    "Host name":"Kepler-438",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":0.98,
+    "Insolation Flux [Earth Flux]":1.31
+  },
+  {
+    "Planet Name":"Kepler-438 b",
+    "Host name":"Kepler-438",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.12,
+    "Insolation Flux [Earth Flux]":1.4
+  },
+  {
+    "Planet Name":"Kepler-438 b",
+    "Host name":"Kepler-438",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":0.98,
+    "Insolation Flux [Earth Flux]":1.31
+  },
+  {
+    "Planet Name":"Kepler-438 b",
+    "Host name":"Kepler-438",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":0.98,
+    "Insolation Flux [Earth Flux]":1.31
+  },
+  {
+    "Planet Name":"TRAPPIST-1 d",
+    "Host name":"TRAPPIST-1",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":0.788,
+    "Insolation Flux [Earth Flux]":1.115
+  },
+  {
+    "Planet Name":"TRAPPIST-1 d",
+    "Host name":"TRAPPIST-1",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":0.772,
+    "Insolation Flux [Earth Flux]":1.143
+  },
+  {
+    "Planet Name":"TRAPPIST-1 e",
+    "Host name":"TRAPPIST-1",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":0.92,
+    "Insolation Flux [Earth Flux]":0.646
+  },
+  {
+    "Planet Name":"TRAPPIST-1 e",
+    "Host name":"TRAPPIST-1",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":0.918,
+    "Insolation Flux [Earth Flux]":0.662
+  },
+  {
+    "Planet Name":"TRAPPIST-1 f",
+    "Host name":"TRAPPIST-1",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.045,
+    "Insolation Flux [Earth Flux]":0.382
+  },
+  {
+    "Planet Name":"TRAPPIST-1 f",
+    "Host name":"TRAPPIST-1",
+    "Distance [pc]":null,
+    "Planet radius (earth radius)":1.045,
+    "Insolation Flux [Earth Flux]":0.373
+  }
+]
