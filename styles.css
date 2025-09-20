@@ -58,9 +58,12 @@ th, td {
   text-align: center;
 }
 
-th {
+/* Table header purple */
+table#planet-table th {
   background-color: #B69FD5 !important;
   color: white !important;
+  position: relative;
+  user-select: none;
 }
 
 tr:nth-child(even) {
@@ -80,7 +83,7 @@ th.sortable {
 
 /* Active sort arrow */
 .sort-icons.active {
-  color: #B69FD5;
+  color: #B69FD5 !important;
   font-weight: bold;
 }
 
@@ -106,7 +109,7 @@ footer {
 /* Tooltip styling */
 .tooltip {
   display: none;
-  position: absolute; /* positioned relative to viewport */
+  position: absolute;
   background-color: #fff;
   border: 1px solid #B69FD5;
   padding: 10px;
