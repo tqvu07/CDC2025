@@ -35,107 +35,21 @@
   </footer>
 
   <script>
-    let openTooltip = null;
-    let openName = null;
-
-    async function fetchPlanetData(name){
-      const urlName = name.replace(/\s+/g,'_');
-      try{
-        const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${urlName}`);
-        return await res.json();
-      } catch {
-        return null;
-      }
-    }
-
-    document.addEventListener("click", () => {
-      if(openTooltip){
-        openTooltip.style.display = "none";
-        openName.classList.remove("selected");
-        openTooltip = null;
-        openName = null;
-      }
-    });
-
     fetch("hz_planets.json")
-      .then(res => res.json())
+      .then(response => response.json())
       .then(data => {
         const tbody = document.querySelector("#planet-table tbody");
 
-        // Create a single tooltip appended to body
-        const tooltip = document.createElement("div");
-        tooltip.classList.add("tooltip");
-        document.body.appendChild(tooltip);
-
         data.forEach(planet => {
           const row = document.createElement("tr");
-
-          // Planet Name cell
-          const nameCell = document.createElement("td");
-          const nameSpan = document.createElement("span");
-          nameSpan.textContent = planet["Planet Name"];
-          nameSpan.classList.add("planet-name");
-          nameSpan.dataset.name = planet["Planet Name"];
-          nameCell.appendChild(nameSpan);
-          row.appendChild(nameCell);
-
-          // Other columns
-          ["Host name","Distance [pc]","Planet radius (earth radius)","Insolation Flux [Earth Flux]"].forEach(col => {
-            const td = document.createElement("td");
-            td.textContent = planet[col];
-            row.appendChild(td);
-          });
-
+          row.innerHTML = `
+            <td>${planet["Planet Name"]}</td>
+            <td>${planet["Host name"]}</td>
+            <td>${planet["Distance [pc]"]}</td>
+            <td>${planet["Planet radius (earth radius)"]}</td>
+            <td>${planet["Insolation Flux [Earth Flux]"]}</td>
+          `;
           tbody.appendChild(row);
-
-          // Hover tooltip
-          nameSpan.addEventListener("mouseenter", async () => {
-            if(openTooltip !== tooltip){
-              const rect = nameSpan.getBoundingClientRect();
-              tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
-              tooltip.style.left = `${rect.left + window.scrollX}px`;
-              tooltip.style.display = "block";
-              tooltip.innerHTML = "Loading...";
-              const info = await fetchPlanetData(nameSpan.dataset.name);
-              tooltip.innerHTML = info ? `
-                <strong>${info.title}</strong><br>
-                ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
-                <div class="tooltip-text">${info.extract}</div>
-              ` : "<p>No information available</p>";
-            }
-          });
-
-          nameSpan.addEventListener("mouseleave", () => {
-            if(openTooltip !== tooltip){
-              tooltip.style.display = "none";
-            }
-          });
-
-          // Click tooltip
-          nameSpan.addEventListener("click", async (e) => {
-            e.stopPropagation();
-
-            if(openTooltip && openTooltip !== tooltip){
-              tooltip.style.display = "none";
-              openName.classList.remove("selected");
-            }
-
-            const rect = nameSpan.getBoundingClientRect();
-            tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
-            tooltip.style.left = `${rect.left + window.scrollX}px`;
-            tooltip.style.display = "block";
-            nameSpan.classList.add("selected");
-            openTooltip = tooltip;
-            openName = nameSpan;
-
-            tooltip.innerHTML = "Loading...";
-            const info = await fetchPlanetData(nameSpan.dataset.name);
-            tooltip.innerHTML = info ? `
-              <strong>${info.title}</strong><br>
-              ${info.thumbnail ? `<img src="${info.thumbnail.source}" width="200"><br>` : ''}
-              <div class="tooltip-text">${info.extract}</div>
-            ` : "<p>No information available</p>";
-          });
         });
       });
   </script>
